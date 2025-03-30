@@ -49,7 +49,7 @@ class Scheduler(nn.Module):
         if self.entropy_scores is None or self.irreducible_scores is None:
             raise ValueError("Need both entropy and irreducible scores")
         
-                # Normalize both (min-max)
+        # norm both (min-max)
         irr_vals = torch.tensor(list(self.irreducible_scores.values()))
         ent_vals = torch.tensor(list(self.entropy_scores.values()))
         irr_norm = (irr_vals - irr_vals.min()) / (irr_vals.max() - irr_vals.min() + 1e-8)
