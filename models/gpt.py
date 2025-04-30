@@ -5,7 +5,8 @@ import math
 from torch.optim.lr_scheduler import LambdaLR
 from tqdm import tqdm
 from torch.utils.data import DataLoader, TensorDataset
-from scheeduler import Scheduler
+from scheduler import Scheduler
+from configs import ModelConfig, TrainConfig
 # ==== GPT2 Decoder ==== #
 
 ### Remeber to switch device to CUDA ###
