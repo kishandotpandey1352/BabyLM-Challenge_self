@@ -1,89 +1,81 @@
+
+import math 
+import random 
 import torch
-import torch.nn as nn
+from torch.utils.data import DataLoader, TensorDataset
 
-class Scheduler(nn.Module):
-    def __init__(self, model, x_data, y_labels, criterion, entropy_scores=None, device='cpu'):
-        super(Scheduler, self).__init__()
-        self.model = model  # proxy model
-        self.x_data = x_data
-        self.y_labels = y_labels
-        self.criterion = criterion
-        self.device = device
+class Scheduler:
+    def __init__(self, train_data, scores, configs, schedule_type:str, init_beta:float, shuffle:bool ):
+        super().__init__()
 
-        self.loss_log = {}  # sample_id → [loss_t0, ..., loss_tN]
-        self.irreducible_scores = None
-        self.entropy_scores = entropy_scores
-        self.combined_scores = None
+        self.train_data = train_data
+        self.scores = scores
+        self.configs = configs
 
-    def TrainProxy(self, epochs=10, lr=1e-3):
+        self.schedule_type = schedule_type
+        self.init_beta = init_beta
+        self.shuffle = shuffle
 
-        optim = torch.optim.Adam(self.model.parameters(), lr=lr)
-        self.model.train()
+        self.sorted_idcs = self.scoreSort()
+        self.sorted_score = self.scoreSort()
 
-        for epoch in range(epochs):
-            for i in range(len(self.x_data)):
-                x = self.x_data[i].unsqueeze(0).to(self.device)
-                y = self.y_labels[i].unsqueeze(0).to(self.device)
+        self.gamma = 0.1
 
-                out = self.model(x)
-                loss = self.criterion(out, y)
+    def scoreSort(self):
+        score = self.scores.cpu().numpy() # make sure still a tensor when passed
 
-                # Log loss
-                if i not in self.loss_log:
-                    self.loss_log[i] = []
-                self.loss_log[i].append(loss.item())
+        pairs = list(enumerate(score))
+        sorted_pairs = sorted(pairs, key=lambda pair: pair[1])
+        sorted_idcs = [idc for idc, _ in sorted_pairs]
 
-                # Backprop
-                optim.zero_grad()
-                loss.backward()
-                optim.step()
-
-    def CalcIrreducibleLoss(self):
-
-        self.irreducible_scores = {
-            i: self.loss_log[i][0] - self.loss_log[i][-1] 
-            for i in self.loss_log}
+        return sorted_idcs
+    
+    def lyapunovReguliser(self, epoch, lambda_n):
+        if len(lambda_n)<2:
+            return 1.
         
-    def CompCombinedScore(self, alpha=0.5):
+        delta_lambda = lambda_n[-1] - lambda_n[-2]
+        alpha = 1.
 
-        if self.entropy_scores is None or self.irreducible_scores is None:
-            raise ValueError("Need both entropy and irreducible scores")
+        if delta_lambda >= 0: # unstable condition => reduce speed
+            alpha *= (1 - self.gamma*lambda_n[-1]/(1 + epoch))
+
+        else: # stable condition => increase speed
+            alpha *= (1 + self.gamma*lambda_n[-1]/(1 + epoch))
+
+        return alpha
+
+    def betaSchedule(self,epoch, alpha): # alpha is inital sampling size. 
         
-        # norm both (min-max)
-        irr_vals = torch.tensor(list(self.irreducible_scores.values()))
-        ent_vals = torch.tensor(list(self.entropy_scores.values()))
-        irr_norm = (irr_vals - irr_vals.min()) / (irr_vals.max() - irr_vals.min() + 1e-8)
-        ent_norm = (ent_vals - ent_vals.min()) / (ent_vals.max() - ent_vals.min() + 1e-8)
+        # adaptive scaling. adapt during training based on validation performance?
+        # if feedback (val) stronger than scaling type, will schedule type wash out?
+        E_n = epoch / self.configs.epochs # current epoch ratio
+        eps = 1e-8
+        if self.schedule_type == 'linear': # schedules the sampling linearly (default)
+            beta_t = min(1., self.init_beta + E_n)
+        if self.schedule_type == 'sigmoid':
+            beta_t = (1 + math.exp(-alpha * E_n))**-1 
+        if self.schedule_type == 'tanh':
+            beta_t = 0.5*math.tanh(alpha * E_n) + 0.5
+        if self.schedule_type == 'log':
+            beta_t = min(1., math.log(alpha * E_n + eps))
+        if self.schedule_type == 'exp':
+            beta_t = min(1., math.exp(alpha * E_n) - 1)
 
-        self.combined_scores = {
-            i: alpha * ent_norm[i].item() + (1 - alpha) * irr_norm[i].item()
-            for i in self.irreducible_scores
-        }
+        # sampling %
+        cutoff = int(beta_t * len(self.sorted_score))
+        sample_idcs = self.sorted_idcs[:cutoff] # sample from sorted indicies 
 
+        if self.shuffle:
+            random.shuffle(sample_idcs) # shuffle idcs in sample
+        return sample_idcs
 
-    def get_curriculum_order(self, strategy='irreducible', ascending=True):
-
-        if strategy == 'irreducible':
-            scores = self.irreducible_scores
-        elif strategy == 'entropy':
-            scores = self.entropy_scores
-        elif strategy == 'combined':
-            scores = self.combined_scores
-        else:
-            raise ValueError("Unknown strategy. Use 'irreducible', 'entropy', or 'combined'.")
-
-        return sorted(scores, key=scores.get, reverse=not ascending)
-
-    def sample_batch(self, batch_size, step=None, strategy='irreducible'):
-
-        order = self.get_curriculum_order(strategy=strategy)
-        if step is not None:
-            order = order[:step]  # narrow to easiest samples
-
-        indices = torch.randperm(len(order))[:batch_size]
-        chosen = [order[i] for i in indices]
-        x_batch = torch.stack([self.x_data[i] for i in chosen])
-        y_batch = torch.stack([self.y_labels[i] for i in chosen])
-        return x_batch.to(self.device), y_batch.to(self.device)
+    def seqentialBatch(self, epoch, alpha):
+        sampled_idcs = self.betaSchedule(epoch, alpha)
+        subset = torch.utils.data.Subset(self.train_data, sampled_idcs)
         
-
+        train_loader = DataLoader(
+            subset, 
+            batch_size=self.configs.batch_size,
+            )
+        return train_loader
