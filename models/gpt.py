@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from scheeduler import Scheduler
 # ==== GPT2 Decoder ==== #
 
-### UPDATE FOR TORCH USE ###
+### Remeber to switch device to CUDA ###
 
 class GPT2Block(nn.Module):
     def __init__(self, config):
