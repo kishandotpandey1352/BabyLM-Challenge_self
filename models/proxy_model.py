@@ -3,6 +3,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 from tqdm import tqdm, trange
 from gpt import GPT2Model
+from configs import ProxyConfig, TrainConfig
 
 class ProxyTrain(torch.nn.Module):
     def __init__(self, holdout_loader: DataLoader, score_loader: DataLoader, configs, model_cls):
