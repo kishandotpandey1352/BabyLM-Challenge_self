@@ -1,0 +1,16 @@
+name: gptcurriculum
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - torchaudio
+  - cudatoolkit=11.7  # match GPU driver
+  - transformers
+  - tqdm
+  - matplotlib
+  - scikit-learn
+  - scipy
+  - numpy

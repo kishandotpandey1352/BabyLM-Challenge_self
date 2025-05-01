@@ -1,0 +1,38 @@
+Write a python script to run the flow of the ML application pipeline.
+Understand the flow
+Understand gpt.py 
+See which all files would be relevant
+create an environment 
+
+I need GPU nodes for training the model, right ? How to do it ?
+How to know if the nodes allocated to me are GPU nodes ?
+
+To do:
+Move code and all files
+Set up the environment and install libraries
+Run GPU nodes
+
+# Commands
+srun --pty --gres=gpu:1 --cpus-per-task=4 --mem=16G --time=01:00:00 bash -i
+module load anaconda/2023a
+conda activate gptcurriculum
+nvidia-smi
+
+# Optional: Check GPU access
+
+srun --pty bash -i
+cd babylm
+
+
+✅ Explanation:
+
+--gres=gpu:1: Request 1 GPU.
+
+--cpus-per-task=4: Use 4 CPU cores.
+
+--mem=16G: Reserve 16 GB RAM.
+
+--time=01:00:00: 1 hour session.
+
+bash -i: Opens an interactive shell.
+

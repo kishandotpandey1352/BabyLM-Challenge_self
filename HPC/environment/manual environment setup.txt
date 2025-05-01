@@ -1,0 +1,11 @@
+#conda env create -f environment.yml
+######### Manual ##########
+conda create -n gptcurriculum python=3.10 -y
+conda activate gptcurriculum
+
+# Install packages
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+pip install transformers tqdm matplotlib scikit-learn scipy
+source activate gptcurriculum
+python -c "import torch; print(torch.cuda.is_available())" # optional to test the created environment
+
