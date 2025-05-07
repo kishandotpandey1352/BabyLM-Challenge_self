@@ -1,9 +1,11 @@
-# ==== Configurations ==== #
+from dataclasses import dataclass
+
+# ==== Configuration ==== #
 @dataclass
 class ModelConfig:
     def __init__(self):
         self.block_size = 32 # context size (min num of tokens in sequence, how long model can see at once)
-        self.vocab_size = 50257 # This is all the unique tokens + 2 for overhead
+        self.vocab_size = 50256
         self.max_iters = 100
         self.n_head = 4
         self.n_embd = 64
@@ -11,12 +13,11 @@ class ModelConfig:
         self.dropout = 0.1
         self.bias: bool = True
         self.device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-                                          # switch out 'mps' for 'cuda' when transferring to github or stanage for cuda use
+                                          # switch out when transferring to github or stanage for cuda use
 
-# Hyperparam Tune the training configs (not model configs for hp tuning - only sclae up and train full model when you have found the optimal training params)
 @dataclass
 class TrainConfig:
-    epochs: int = 50
+    epochs: int = 20
     batch_size: int = 32
     max_len: int = 64
     pad: int = 0
@@ -26,12 +27,13 @@ class TrainConfig:
     warmup_iters: int = 100
     n_steps: int = 0
     lr_decay_iters: int = 1000
+    save_checkpoints: bool = False
     save_every: int = 1
     save_every_steps:int = 2000
 
 @dataclass
 class ProxyConfig:
-    epochs:int = 2
+    epochs:int = 5
     vocab_size:int = ModelConfig().vocab_size    # keep same vocab
     block_size:int = ModelConfig().block_size    # same context length
     batch_size:int = 32
@@ -48,3 +50,5 @@ class ProxyConfig:
     T_steps:int = 1_00
     t0:int = 5_0
     step:int = 0
+
+    alpha_scale:float = 0.7 # keep [0,1] range
