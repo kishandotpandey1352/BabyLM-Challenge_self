@@ -5,6 +5,7 @@ from tqdm import tqdm, trange
 from gpt import GPT2Model
 from configs import ProxyConfig, TrainConfig
 
+
 class ProxyTrain(torch.nn.Module):
     def __init__(self, holdout_loader: DataLoader, score_loader: DataLoader, configs, model_cls):
         super().__init__()
@@ -22,7 +23,7 @@ class ProxyTrain(torch.nn.Module):
         # Loss for training uses default (mean)
         self.Loss = torch.nn.CrossEntropyLoss()
         # Model class for fresh instances
-        self.model_cls   = model_cls
+        self.model_cls = model_cls
 
     def train(self):
         hold_iter = iter(self.holdout_loader)
@@ -47,33 +48,46 @@ class ProxyTrain(torch.nn.Module):
                 print(f"Proxy step {step}/{self.configs.T_steps}, loss={loss.item():.4f}")
 
             if step == self.configs.t0:
-                torch.save(self.train_model.state_dict(), "proxy_early.pt")
+                torch.save(self.train_model.state_dict(), f"proxy_early_{self.configs.block_size}.pt")
                 print(f"Saved proxy early checkpoint at step {step}")
 
         # final checkpoint
-        torch.save(self.train_model.state_dict(), "proxy_late.pt")
+        torch.save(self.train_model.state_dict(), f"proxy_late_{self.configs.block_size}.pt")
         print(f"Saved proxy final checkpoint at step {self.configs.T_steps}")
+        
 
 
     def reductionLoss(self, model, inputs, targets):
-        logits = model(inputs) # [B, L, V]
+        logits = model(inputs)         # [B, L, V]
         B, L, V = logits.shape
         loss_fn = torch.nn.CrossEntropyLoss(reduction="none")
         token_loss = loss_fn(logits.view(B * L, V), targets.view(-1))  # [B*L]
-        seq_loss = token_loss.view(B, L).mean(dim=1) # [B]
+        seq_loss = token_loss.view(B, L).mean(dim=1)                   # [B]
         return seq_loss
+    
+    def sequenceEntropy(self, model, inputs):
+        logits = model(inputs)
+        B, L, V = logits.shape
+        token_probs = F.softmax(logits, dim=-1) # [B, L, V]
+        log_probs = torch.log(token_probs + 1e-8)
+        token_entropy = -torch.sum(token_probs * log_probs, dim=-1) # [B, L]
+        seq_entropy = token_entropy.mean(dim=1) # [B]
+        return seq_entropy
 
-    def LearnabilityScore(self):
+
+    def LearnabilityScore(self, type='composite'):
+
         # Load early proxy
         early = self.model_cls(self.configs).to(self.device)
-        early.load_state_dict(torch.load("proxy_early.pt", weights_only=True))
+        early.load_state_dict(torch.load(f"proxy_early_{self.configs.block_size}.pt", weights_only=True))
         early.eval()
         # Load late proxy
         late = self.model_cls(self.configs).to(self.device)
-        late.load_state_dict(torch.load("proxy_late.pt", weights_only=True))
+        late.load_state_dict(torch.load(f"proxy_late_{self.configs.block_size}.pt", weights_only=True))
         late.eval()
 
         all_deltas = []
+        abs_entropys = []
         with torch.no_grad():
             for x, y in tqdm(self.score_loader):
                 x, y = x.to(self.device), y.to(self.device)
@@ -82,5 +96,28 @@ class ProxyTrain(torch.nn.Module):
                 delta = loss_early - loss_late
                 all_deltas.append(delta)
 
+                entropy_late = self.sequenceEntropy(late, x)
+                abs_entropys.append(entropy_late)
+            
+        irr_loss = torch.cat(all_deltas, dim=0)
+        entropy = torch.cat(abs_entropys, dim=0)
+
+        eps = 1e-8
+
+        # normalise for composite score
+        norm_irr = (irr_loss - torch.min(irr_loss)) / (torch.max(irr_loss) - torch.min(irr_loss) + eps)
+        norm_entropy = (entropy - torch.min(entropy)) / (torch.max(entropy) - torch.min(entropy) + eps)
+
         # return flat tensor of learnability scores
-        return torch.cat(all_deltas, dim=0)
+        if type == 'Loss':
+            return irr_loss
+        if type == 'Entropy':
+            return entropy
+        elif type == 'composite':
+            comp_score = self.configs.alpha_scale * norm_irr + (1 - self.configs.alpha_scale)*norm_entropy
+            return comp_score
+
+        
+        
+        
+        
