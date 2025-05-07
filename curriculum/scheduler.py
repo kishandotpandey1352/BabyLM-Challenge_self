@@ -17,7 +17,6 @@ class Scheduler:
         self.shuffle = shuffle
 
         self.sorted_idcs = self.scoreSort()
-        self.sorted_score = self.scoreSort()
 
         self.gamma = 0.1
 
@@ -46,9 +45,9 @@ class Scheduler:
         return alpha
 
     def betaSchedule(self,epoch, alpha): # alpha is inital sampling size. 
-        
         # adaptive scaling. adapt during training based on validation performance?
         # if feedback (val) stronger than scaling type, will schedule type wash out?
+        print(f"[{self.schedule_type}]")
         E_n = epoch / self.configs.epochs # current epoch ratio
         eps = 1e-8
         if self.schedule_type == 'linear': # schedules the sampling linearly (default)
@@ -60,10 +59,12 @@ class Scheduler:
         if self.schedule_type == 'log':
             beta_t = min(1., math.log(alpha * E_n + eps))
         if self.schedule_type == 'exp':
-            beta_t = min(1., math.exp(alpha * E_n) - 1)
-
+            beta_t = min(1., math.exp(alpha * E_n) - 1 + eps)
+        
+        self.current_beta = beta_t
+        self.prct_seen = beta_t * 100
         # sampling %
-        cutoff = int(beta_t * len(self.sorted_score))
+        cutoff = max(1., int(beta_t * len(self.sorted_idcs))) 
         sample_idcs = self.sorted_idcs[:cutoff] # sample from sorted indicies 
 
         if self.shuffle:
