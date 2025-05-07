@@ -7,10 +7,24 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader, TensorDataset
 from scheduler import Scheduler
 from configs import ModelConfig, TrainConfig
-# ==== GPT2 Decoder ==== #
+import csv
+
+class MetricLogger:
+    def __init__(self, filepath):
+        self.filepath = filepath
+        self.headers = ["epoch", "train_loss", "val_loss", "alpha", "beta", "lambda_val", "num_samples"]
+        if not os.path.exists(filepath):
+            with open(filepath, 'w', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(self.headers)
+
+    def log(self, epoch, train_loss, val_loss, alpha,  beta, lambda_val, num_samples):
+        with open(self.filepath, 'a', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow([epoch, train_loss, val_loss, alpha,  beta,lambda_val, num_samples])
 
 ### UPDATE FOR TORCH USE ###
-
+# ==== GPT2 Decoder ==== #
 class GPT2Block(nn.Module):
     def __init__(self, config):
         super().__init__()
