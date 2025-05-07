@@ -9,7 +9,7 @@ from scheduler import Scheduler
 from configs import ModelConfig, TrainConfig
 # ==== GPT2 Decoder ==== #
 
-### Remeber to switch device to CUDA ###
+### UPDATE FOR TORCH USE ###
 
 class GPT2Block(nn.Module):
     def __init__(self, config):
@@ -66,7 +66,6 @@ class GPT2Block(nn.Module):
        
         return x
     
-
 class GPT2Model(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -118,6 +117,7 @@ class GPTTrainer:
     def __init__(self, x, y, train_loader, val_loader, train_config, model_config, scheduler, check_points_dir=None):
         self.x, self.y = x, y
         self.train_config = train_config
+        self.save_checkpoints = train_config.save_checkpoints
         self.check_points_dir = check_points_dir
 
         self.train_loader = train_loader
@@ -161,7 +161,7 @@ class GPTTrainer:
 
         self.step_count += 1
 
-        if (self.check_points_dir and self.step_count % self.train_config.save_every_steps == 0):
+        if self.train_config.save_checkpoints and (self.check_points_dir and self.step_count % self.train_config.save_every_steps == 0):
             checkpoint = {
                 "step": self.step_count,
                 "model": self.model.state_dict(),
@@ -194,6 +194,7 @@ class GPTTrainer:
         return total_loss / len(val_loader)
 
     def train(self):
+        logger = MetricLogger("logs/train_metrics.csv")
 
         alpha = 1.
         train_loss_arr = []
@@ -223,9 +224,7 @@ class GPTTrainer:
                 n_batches += 1
 
             avg_loss = total_loss / n_batches
-            train_loss_arr.append(total_loss)
-            print(f"Epoch {epoch + 1} | Avg Loss: {avg_loss:.4f}")
-
+            train_loss_arr.append(avg_loss)
     
             val_loss = self.validate(self.val_loader)
             val_loss_arr.append(val_loss)
@@ -242,8 +241,23 @@ class GPTTrainer:
 
             self.prev_val_loss = val_loss # update prev
 
-            print(f"Epoch {epoch + 1} | Validation Loss: {val_loss:.4f}")
+            print(f"Epoch {epoch + 1} | Training Loss: {avg_loss:.2f} | Validation Loss: {val_loss:.4f}")
             
+            # logging for analysis
+            lambda_val = self.lambdas[-1] if self.lambdas else 0.0
+            beta_t = self.scheduler.current_beta
+            prct_samples = self.scheduler.prct_seen
+            # add epoch avg scores + mean and std, min and max
+
+            logger.log(
+                epoch=epoch + 1,
+                train_loss=avg_loss,
+                val_loss=val_loss,
+                alpha=alpha,
+                beta=beta_t,
+                lambda_val=lambda_val,
+                num_samples=prct_samples
+                )
 
             if self.check_points_dir and (epoch + 1) % self.train_config.save_every == 0:
                 torch.save(self.model.state_dict(), f"{self.check_points_dir}/model_epoch_{epoch + 1}.pt")
@@ -317,5 +331,8 @@ class GenerateGPT:
         # Decode the tokens back to text
         generated_text = self.tokenizer.decode(input_tensor[0].tolist())
         return generated_text
+
+ 
+
 
  
