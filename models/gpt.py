@@ -5,9 +5,10 @@ import math
 from torch.optim.lr_scheduler import LambdaLR
 from tqdm import tqdm
 from torch.utils.data import DataLoader, TensorDataset
-from scheduler import Scheduler
-from configs import ModelConfig, TrainConfig
+from curriculum.scheduler import Scheduler
+from utils.configs import ModelConfig, TrainConfig
 import csv
+import os
 
 class MetricLogger:
     def __init__(self, filepath):
@@ -23,8 +24,10 @@ class MetricLogger:
             writer = csv.writer(f)
             writer.writerow([epoch, train_loss, val_loss, alpha,  beta,lambda_val, num_samples])
 
-### UPDATE FOR TORCH USE ###
 # ==== GPT2 Decoder ==== #
+
+### UPDATE FOR TORCH USE ###
+
 class GPT2Block(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -128,7 +131,7 @@ class GPTTrainer:
             return max(0.0, float(train_config.total_steps - current_step) / float(max(1, train_config.total_steps - train_config.warmup_iters)))
         return LambdaLR(optim, lr_lambda)
 
-    def __init__(self, x, y, train_loader, val_loader, train_config, model_config, scheduler, check_points_dir=None):
+    def __init__(self, x, y, train_loader, val_loader, train_config, model_config, scheduler=None, check_points_dir=None):
         self.x, self.y = x, y
         self.train_config = train_config
         self.save_checkpoints = train_config.save_checkpoints
@@ -136,7 +139,7 @@ class GPTTrainer:
 
         self.train_loader = train_loader
         self.val_loader = val_loader
-        self.scheduler = scheduler
+        #self.scheduler = scheduler
 
         self.device = model_config.device
 
@@ -207,7 +210,11 @@ class GPTTrainer:
                 total_loss += loss.item()
         return total_loss / len(val_loader)
 
-    def train(self):
+    def train(self, scheduler=None):
+        if scheduler is None:
+            print("Running Baseline Model")
+        else:
+            print("Running Model with Scheduler")
         logger = MetricLogger("logs/train_metrics.csv")
 
         alpha = 1.
@@ -220,11 +227,14 @@ class GPTTrainer:
             total_loss = 0.
             n_batches = 0
             if self.lambdas:
-                alpha *= self.scheduler.lyapunovReguliser(epoch, self.lambdas)
-                alpha_arr.append(alpha)
                 lambdas_arr.append(self.lambdas[-1])
 
-            train_loader = self.scheduler.seqentialBatch(epoch, alpha)
+            if scheduler is not None:
+                alpha *= scheduler.lyapunovReguliser(epoch, self.lambdas)
+                alpha_arr.append(alpha)
+                train_loader = scheduler.seqentialBatch(epoch, alpha)
+            else:
+                train_loader = self.train_loader
 
             if self.step_count > 0:
                 current_lr = self.optim.param_groups[0]['lr']
@@ -259,8 +269,8 @@ class GPTTrainer:
             
             # logging for analysis
             lambda_val = self.lambdas[-1] if self.lambdas else 0.0
-            beta_t = self.scheduler.current_beta
-            prct_samples = self.scheduler.prct_seen
+            beta_t = scheduler.current_beta if scheduler else 1.0
+            prct_samples = scheduler.prct_seen if scheduler else 100
             # add epoch avg scores + mean and std, min and max
 
             logger.log(
@@ -282,19 +292,19 @@ class GPTTrainer:
 # Helper function for filtering logits using top-k and/or nucleus (top-p) sampling
 def top_k_top_p_filtering(logits, top_k=0, top_p=0.0, filter_value=-float('Inf')):
 
-    # Top-K filtering: keep only k highest tokens
+    # top-K filtering: keep only k highest tokens
     if top_k > 0:
         values, indices = torch.topk(logits, top_k)
         threshold = values[-1]
         logits[logits < threshold] = filter_value
 
-    # Top-p (nucleus) filtering
+    # top-p (nucleus) filtering
     if top_p > 0.0:
         sorted_logits, sorted_indices = torch.sort(logits, descending=True)
         cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
-        # Remove tokens with cumulative probability above the threshold
+        # remove tokens with cumulative prob above the threshold
         sorted_indices_to_remove = cumulative_probs > top_p
-        # Shift the indices to retain the first token above the threshold
+        # shift the idcs to kep the 1st token above the threshold
         sorted_indices_to_remove[..., 1:] = sorted_indices_to_remove[..., :-1].clone()
         sorted_indices_to_remove[..., 0] = 0
 
@@ -320,23 +330,23 @@ class GenerateGPT:
         input_ids = self.tokenizer.encode(self.prompt)
         input_tensor = torch.tensor([input_ids], device=next(self.model.parameters()).device)
 
-        # Autoregressive generation loop
+        # Autoregressive gen loop
         with torch.no_grad():
             for _ in range(self.max_len):
                 logits = self.model(input_tensor)
                 next_token_logits = logits[0, -1, :]
 
-                # Scale logits by temperature
+                # Scale logits by temp
                 next_token_logits = next_token_logits / temperature
 
-                # Apply top-k/top-p filtering if required
+                # apply top-k/top-p filtering if required
                 filtered_logits = top_k_top_p_filtering(next_token_logits.clone(), top_k=top_k, top_p=top_p)
                 probabilities = F.softmax(filtered_logits, dim=-1)
 
                 # Sample the next token
                 next_token = torch.multinomial(probabilities, num_samples=1).item()
 
-                # Append sampled token to input_ids tensor
+                # add sampled token to input ids tensor
                 input_tensor = torch.cat([input_tensor, torch.tensor([[next_token]], device=input_tensor.device)], dim=1)
 
                 if next_token == self.tokenizer.eos_token_id: #end of sequence token
@@ -345,8 +355,5 @@ class GenerateGPT:
         # Decode the tokens back to text
         generated_text = self.tokenizer.decode(input_tensor[0].tolist())
         return generated_text
-
- 
-
 
  

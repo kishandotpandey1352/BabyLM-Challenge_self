@@ -2,8 +2,9 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 from tqdm import tqdm, trange
-from gpt import GPT2Model
-from configs import ProxyConfig, TrainConfig
+from models.gpt import GPT2Model
+from utils.configs import ProxyConfig, TrainConfig
+from torch.nn import functional as F
 
 
 class ProxyTrain(torch.nn.Module):
