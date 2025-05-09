@@ -4,7 +4,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 
 #model's path
-MODEL_PATH = "../models/my_babyLM_model"
+MODEL_PATH = "./models/my_babyLM_model"
 
 # Load model and tokenizer
 tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
