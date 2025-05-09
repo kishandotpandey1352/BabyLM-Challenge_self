@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import DataLoader, TensorDataset
 
 class Scheduler:
-    def __init__(self, train_data, scores, configs, schedule_type:str, init_beta:float, shuffle:bool ):
+    def __init__(self, train_data, scores, configs, schedule_type:str, shuffle:bool ):
         super().__init__()
 
         self.train_data = train_data
@@ -13,7 +13,6 @@ class Scheduler:
         self.configs = configs
 
         self.schedule_type = schedule_type
-        self.init_beta = init_beta
         self.shuffle = shuffle
 
         self.sorted_idcs = self.scoreSort()
@@ -51,7 +50,7 @@ class Scheduler:
         E_n = epoch / self.configs.epochs # current epoch ratio
         eps = 1e-8
         if self.schedule_type == 'linear': # schedules the sampling linearly (default)
-            beta_t = min(1., self.init_beta + E_n)
+            beta_t = min(1., alpha * E_n)
         if self.schedule_type == 'sigmoid':
             beta_t = (1 + math.exp(-alpha * E_n))**-1 
         if self.schedule_type == 'tanh':
