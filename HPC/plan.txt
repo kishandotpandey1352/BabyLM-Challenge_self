@@ -36,3 +36,7 @@ cd babylm
 
 bash -i: Opens an interactive shell.
 
+website: https://docs.hpc.shef.ac.uk/en/latest/stanage/GPUComputingStanage.html#gsc.tab=0
+# GPU commands:
+srun --partition=gpu --qos=gpu --gres=gpu:1 --pty bash
+nvidia-smi
