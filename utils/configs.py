@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import torch 
 
 # ==== Configuration ==== #
 @dataclass
@@ -17,7 +18,7 @@ class ModelConfig:
 
 @dataclass
 class TrainConfig:
-    epochs: int = 20
+    epochs: int = 5
     batch_size: int = 32
     max_len: int = 64
     pad: int = 0
