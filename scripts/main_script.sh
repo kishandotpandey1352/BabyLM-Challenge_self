@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+SCORING="composite"
+INIT_BETA="0.3"
+SCHEDULE_TYPE="sigmoid"
+
 #SBATCH --job-name=babylm-gpt
 #SBATCH --output=logs/hps.out
 #SBATCH --error=logs/hps.err
@@ -13,16 +18,8 @@
 source ~/.bashrc 
 conda activate babylm
 
-# adjust path for ur hpc user
-cd /users/acp24mw/BabyLM-Challenge
-
-export PYTHONPATH=$(pwd)
-
-# Run the script
-python hps/param_tuning.py \
+python main/gpt_model.py \
     --data_path tokenizers/10M_data_token.pkl \
-    --toggle_scheduler 'off' \
-    --score_type 'composite' \
-    --n_tokens 1000 \
-    --proxy_n_trials 1 \
-    --main_n_trials 1
+    --scoring ${SCORING} \
+    --init_beta ${INIT_BETA} \
+    --schedule_type ${SCHEDULE_TYPE}
