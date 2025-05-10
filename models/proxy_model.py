@@ -8,12 +8,13 @@ from torch.nn import functional as F
 
 
 class ProxyTrain(torch.nn.Module):
-    def __init__(self, holdout_loader: DataLoader, score_loader: DataLoader, configs, model_cls):
+    def __init__(self, holdout_loader: DataLoader, holdout_val_loader: DataLoader, score_loader: DataLoader, configs, model_cls):
         super().__init__()
         # Loader for training proxy
         self.holdout_loader = holdout_loader
         # Loader for computing learnability on unseen data
         self.score_loader = score_loader
+        self.val_loader = holdout_val_loader
         self.configs = configs
         self.device = configs.device
 
@@ -25,6 +26,24 @@ class ProxyTrain(torch.nn.Module):
         self.Loss = torch.nn.CrossEntropyLoss()
         # Model class for fresh instances
         self.model_cls = model_cls
+        self.criterion = nn.CrossEntropyLoss()
+
+    def validate(self):
+        self.train_model.eval()
+        total_loss = 0
+        with torch.no_grad():
+            for x, y in self.val_loader:
+                x = x.to(self.device)
+                y = y.to(self.device)
+
+                logits = self.train_model(x)
+                b,t,v = logits.shape
+                logits=logits.view(b*t, v)
+                y = y.view(b*t)
+
+                loss = self.criterion(logits, y)
+                total_loss += loss.item()
+        return total_loss /len(self.val_loader)
 
     def train(self):
         hold_iter = iter(self.holdout_loader)
@@ -49,11 +68,11 @@ class ProxyTrain(torch.nn.Module):
                 print(f"Proxy step {step}/{self.configs.T_steps}, loss={loss.item():.4f}")
 
             if step == self.configs.t0:
-                torch.save(self.train_model.state_dict(), f"proxy_early_{self.configs.block_size}.pt")
+                torch.save(self.train_model.state_dict(), f"trained_models/proxy_early_{self.configs.block_size}.pt")
                 print(f"Saved proxy early checkpoint at step {step}")
 
         # final checkpoint
-        torch.save(self.train_model.state_dict(), f"proxy_late_{self.configs.block_size}.pt")
+        torch.save(self.train_model.state_dict(), f"trained_models/proxy_late_{self.configs.block_size}.pt")
         print(f"Saved proxy final checkpoint at step {self.configs.T_steps}")
         
 
@@ -76,15 +95,15 @@ class ProxyTrain(torch.nn.Module):
         return seq_entropy
 
 
-    def LearnabilityScore(self, type='composite'):
+    def LearnabilityScore(self, type='composite', alpha_scale=None):
 
         # Load early proxy
         early = self.model_cls(self.configs).to(self.device)
-        early.load_state_dict(torch.load(f"proxy_early_{self.configs.block_size}.pt", weights_only=True))
+        early.load_state_dict(torch.load(f"trained_models/proxy_early_{self.configs.block_size}.pt", weights_only=True))
         early.eval()
         # Load late proxy
         late = self.model_cls(self.configs).to(self.device)
-        late.load_state_dict(torch.load(f"proxy_late_{self.configs.block_size}.pt", weights_only=True))
+        late.load_state_dict(torch.load(f"trained_models/proxy_late_{self.configs.block_size}.pt", weights_only=True))
         late.eval()
 
         all_deltas = []
@@ -115,7 +134,8 @@ class ProxyTrain(torch.nn.Module):
         if type == 'Entropy':
             return entropy
         elif type == 'composite':
-            comp_score = self.configs.alpha_scale * norm_irr + (1 - self.configs.alpha_scale)*norm_entropy
+            alpha = alpha_scale if alpha_scale is not None else self.configs.alpha_scale
+            comp_score = alpha * norm_irr + (1 - alpha)*norm_entropy
             return comp_score
 
         

@@ -151,6 +151,7 @@ class GPTTrainer:
         self.criterion = nn.CrossEntropyLoss()
 
         self.step_count = 0
+        print(f"Using device: {self.device}")
 
         # lyponav regularisation
         self.L0 = None # get initial val loss
@@ -230,9 +231,9 @@ class GPTTrainer:
                 lambdas_arr.append(self.lambdas[-1])
 
             if scheduler is not None:
-                alpha *= scheduler.lyapunovReguliser(epoch, self.lambdas)
+                alpha *= scheduler.lyapunovReguliser(self.lambdas)
                 alpha_arr.append(alpha)
-                train_loader = scheduler.seqentialBatch(epoch, alpha)
+                train_loader = scheduler.seqentialBatch(alpha)
             else:
                 train_loader = self.train_loader
 
@@ -246,6 +247,10 @@ class GPTTrainer:
                 loss_val = self.step(x, y)
                 total_loss += loss_val
                 n_batches += 1
+
+                if scheduler is not None and self.step_count % self.train_config.alpha_update_steps == 0:
+                    alpha *= scheduler.lyapunovReguliser(self.lambdas)
+                    print(f"[Step {self.step_count}] updated alpha: {alpha:.4f}")
 
             avg_loss = total_loss / n_batches
             train_loss_arr.append(avg_loss)
