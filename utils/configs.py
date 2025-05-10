@@ -13,7 +13,7 @@ class ModelConfig:
         self.n_layers = 4
         self.dropout = 0.0079737
         self.bias: bool = True
-        self.device = torch.device("mps" if torch.mps.is_available() else "cpu")
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 @dataclass
 class TrainConfig:
@@ -48,7 +48,7 @@ class ProxyConfig:
     bias: bool = False
     min_lr: float = 0.0001388403383951373
     max_lr: float = 0.0005018765292380106
-    device = torch.device("mps" if torch.mps.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     T_steps: int = 250
     t0: int = 25
     step: int = 0
