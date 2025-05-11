@@ -27,12 +27,14 @@ class ProxyTrain(torch.nn.Module):
         # Model class for fresh instances
         self.model_cls = model_cls
         self.criterion = nn.CrossEntropyLoss()
+        print(f"[DEBUG] Proxy model on: {next(self.train_model.parameters()).device}")
 
-    def validate(self):
+
+    def validate(self, val_loader):
         self.train_model.eval()
         total_loss = 0
         with torch.no_grad():
-            for x, y in self.val_loader:
+            for x, y in val_loader:
                 x = x.to(self.device)
                 y = y.to(self.device)
 
@@ -47,6 +49,10 @@ class ProxyTrain(torch.nn.Module):
 
     def train(self):
         hold_iter = iter(self.holdout_loader)
+        total_loss = 0
+        log_every=100
+        loss_arr = []
+        val_arr = []
         for step in trange(1, self.configs.T_steps + 1, desc="Proxy training"):
             try:
                 x, y = next(hold_iter)
@@ -60,20 +66,29 @@ class ProxyTrain(torch.nn.Module):
             B, L, V = logits.shape
 
             loss = self.Loss(logits.view(B * L, V), y.view(-1))
+            total_loss += loss
             self.optim.zero_grad()
             loss.backward()
             self.optim.step()
+            if step % log_every == 0 or step == self.configs.T_steps:
+                val_loss = self.validate(self.val_loader)
+                val_arr.append(val_loss)
+                avg_loss = total_loss/log_every
+                loss_arr.append(avg_loss)
+                print(f"Epoch {step/100} | Training Loss: {avg_loss:.3f} | Validation Loss: {val_loss:.3f}")
+                total_loss=0
 
             if step % 1000 == 0:
                 print(f"Proxy step {step}/{self.configs.T_steps}, loss={loss.item():.4f}")
 
             if step == self.configs.t0:
-                torch.save(self.train_model.state_dict(), f"trained_models/proxy_early_{self.configs.block_size}.pt")
+                torch.save(self.train_model.state_dict(), f"proxy_early_{self.configs.block_size}.pt")
                 print(f"Saved proxy early checkpoint at step {step}")
 
         # final checkpoint
-        torch.save(self.train_model.state_dict(), f"trained_models/proxy_late_{self.configs.block_size}.pt")
+        torch.save(self.train_model.state_dict(), f"proxy_late_{self.configs.block_size}.pt")
         print(f"Saved proxy final checkpoint at step {self.configs.T_steps}")
+        return loss_arr ,val_arr
         
 
 
@@ -99,12 +114,16 @@ class ProxyTrain(torch.nn.Module):
 
         # Load early proxy
         early = self.model_cls(self.configs).to(self.device)
-        early.load_state_dict(torch.load(f"trained_models/proxy_early_{self.configs.block_size}.pt", weights_only=True))
+        early.load_state_dict(torch.load(f"proxy_early_{self.configs.block_size}.pt", map_location=self.configs.device))
         early.eval()
         # Load late proxy
         late = self.model_cls(self.configs).to(self.device)
-        late.load_state_dict(torch.load(f"trained_models/proxy_late_{self.configs.block_size}.pt", weights_only=True))
+        late.load_state_dict(torch.load(f"proxy_late_{self.configs.block_size}.pt", map_location=self.configs.device))
         late.eval()
+
+        print(f"[DEBUG] Early model on: {next(early.parameters()).device}")
+        print(f"[DEBUG] Late model on: {next(late.parameters()).device}")
+
 
         all_deltas = []
         abs_entropys = []
