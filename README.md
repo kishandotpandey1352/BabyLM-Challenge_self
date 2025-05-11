@@ -22,7 +22,7 @@ Local machine excercution:
 HPC Usage:
 - Hpc scripts will have to be adjusted by user manually for sbatch. User name corrections must be applied for user specific username on stanage.
 - All error and output files will be found in the 'logs' directory.
-- GPU usage can be count in the .out files for each model. Check gpu is being used (indicated by '1MiB /  81920MiB |      0%'), if idle check pytorch version compatibility, if still not working with compatibile torch correct configs to force to GPU (device = torch.device("cuda")
+- GPU usage can be count in the .out files for each model. Check gpu is being used (indicated by '1MiB /  81920MiB |      0%'), if idle check pytorch version compatibility which can be seen by passing 'conda list' to the login node on Stanage, if still not working with compatibile torch correct configs to force to GPU (device = torch.device("cuda"), and check pytorch-mutex is not installed or it will overwrite pytorch-cuda.
 - Create a conda enviroment with compatible packages (numpy, torch, sklearn, optuna, pandas) called babylm, or edit the activate command in bash files to you preferred enviroment. 
 
 General Instructions for Local Use:
