@@ -22,5 +22,5 @@ Local machine excercution:
 HPC Usage:
 - Hpc scripts will have to be adjusted by user manually for sbatch. User name corrections must be applied for user specific.
 - All error and output files will be found in the 'logs' directory.
-- GPU usage can be count in the .out files for each model. Check gpu is being used (indicated by '1MiB /  81920MiB |      0%'), if idle check pytorch version compatibility, if still not working with compatibile torch correct configs to force to GPU
+- GPU usage can be count in the .out files for each model. Check gpu is being used (indicated by '1MiB /  81920MiB |      0%'), if idle check pytorch version compatibility, if still not working with compatibile torch correct configs to force to GPU (device = torch.device("cuda")
       
