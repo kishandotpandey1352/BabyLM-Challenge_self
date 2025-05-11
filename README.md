@@ -4,8 +4,8 @@ Team NA1 Model implementation for the BabyLM Challenge.
 GPT2 decoder model with entropy and adaptive curriculum based design.
 
 Prerequisites:
-  - Remeber if using hpc scripts to change ur user name.
-  - For cuda compatibility check working torch version compatible with cuda (https://discuss.pytorch.org/t/which-cuda-version-to-choose-when-installing-pytorch/217257)
+  - Remeber if using hpc scripts to change your user name.
+  - For cuda compatibility check that the torch version you have is compatible with cuda (https://discuss.pytorch.org/t/which-cuda-version-to-choose-when-installing-pytorch/217257)
 
 Local machine excercution:
 - If running locally, parse args are required.
