@@ -1,0 +1,1 @@
+from hf_compat.compatibility import hfWrapper, hfConfig

@@ -5,7 +5,7 @@ import torch
 from torch.utils.data import DataLoader, TensorDataset
 
 class Scheduler:
-    def __init__(self, train_data, scores, configs, schedule_type:str, shuffle:bool ):
+    def __init__(self, train_data, scores, configs, gamma, schedule_type:str, shuffle:bool ):
         super().__init__()
 
         self.train_data = train_data
@@ -17,7 +17,8 @@ class Scheduler:
 
         self.sorted_idcs = self.scoreSort()
 
-        self.gamma = 0.1
+        self.steps=0
+        self.gamma=gamma
 
     def scoreSort(self):
         score = self.scores.cpu().numpy() # make sure still a tensor when passed
@@ -28,7 +29,7 @@ class Scheduler:
 
         return sorted_idcs
     
-    def lyapunovReguliser(self, epoch, lambda_n):
+    def lyapunovReguliser(self,lambda_n):
         if len(lambda_n)<2:
             return 1.
         
@@ -36,18 +37,17 @@ class Scheduler:
         alpha = 1.
 
         if delta_lambda >= 0: # unstable condition => reduce speed
-            alpha *= (1 - self.gamma*lambda_n[-1]/(1 + epoch))
+            alpha *= (1 - self.gamma*lambda_n[-1]/(1 + self.steps))
 
         else: # stable condition => increase speed
-            alpha *= (1 + self.gamma*lambda_n[-1]/(1 + epoch))
+            alpha *= (1 + self.gamma*lambda_n[-1]/(1 + self.steps))
 
         return alpha
 
-    def betaSchedule(self,epoch, alpha): # alpha is inital sampling size. 
-        # adaptive scaling. adapt during training based on validation performance?
-        # if feedback (val) stronger than scaling type, will schedule type wash out?
+    def betaSchedule(self, alpha): 
+
         print(f"[{self.schedule_type}]")
-        E_n = epoch / self.configs.epochs # current epoch ratio
+        E_n = self.steps / self.configs.total_steps # current epoch ratio
         eps = 1e-8
         if self.schedule_type == 'linear': # schedules the sampling linearly (default)
             beta_t = min(1., alpha * E_n)
@@ -63,17 +63,17 @@ class Scheduler:
         self.current_beta = beta_t
         self.prct_seen = beta_t * 100
         # sampling %
-        cutoff = max(1., int(beta_t * len(self.sorted_idcs))) 
+        cutoff = max(1, int(beta_t * len(self.sorted_idcs))) 
         sample_idcs = self.sorted_idcs[:cutoff] # sample from sorted indicies 
 
         if self.shuffle:
             random.shuffle(sample_idcs) # shuffle idcs in sample
         return sample_idcs
 
-    def seqentialBatch(self, epoch, alpha):
-        sampled_idcs = self.betaSchedule(epoch, alpha)
+    def seqentialBatch(self, alpha):
+        sampled_idcs = self.betaSchedule(alpha)
         subset = torch.utils.data.Subset(self.train_data, sampled_idcs)
-        
+        self.steps+=1
         train_loader = DataLoader(
             subset, 
             batch_size=self.configs.batch_size,
