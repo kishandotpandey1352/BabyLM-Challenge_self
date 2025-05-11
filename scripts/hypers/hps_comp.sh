@@ -16,7 +16,7 @@ module load CUDA/11.7.0
 
 
 # Step into the project root
-cd /users/acp24mw/BabyLM-Challenge # change user specific for your user
+cd /users/#username#/BabyLM-Challenge # change user specific for your user
 
 nvidia-smi
 free -h
