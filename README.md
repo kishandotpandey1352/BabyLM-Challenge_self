@@ -24,4 +24,27 @@ HPC Usage:
 - All error and output files will be found in the 'logs' directory.
 - GPU usage can be count in the .out files for each model. Check gpu is being used (indicated by '1MiB /  81920MiB |      0%'), if idle check pytorch version compatibility, if still not working with compatibile torch correct configs to force to GPU (device = torch.device("cuda")
 - Create a conda enviroment with compatible packages (numpy, torch, sklearn, optuna, pandas) called babylm, or edit the activate command in bash files to you preferred enviroment. 
-      
+
+General Instructions for Local Use:
+- scripts in the main and hps file can be run locally.
+- In order to run locally see the above 'local machine excercution' section above. The arguments avalible for each argument are as follows:
+  
+              param_tuning.py accepts args:
+                 --data_path   -> this directs the model to train ok specified data. In this repo it is found inside tokenisers, e.g 'tokenizers/10M_data_token.pkl'
+                 --toggle_scheduler  -> this controls if the curriculum scheduling is on or off to allow for basline and enhanced training, arguments are ['on','off']
+                 --score_type  -> this controls the type of scorring returned by the proxy trainer, that i then passed to the scheduler, arguments are ['composite','Loss','Entropy']
+                 --n_tokens  -> this controls the number of tokens exposed to the model (tokens are shuffled before passing so do not have any order), for testing on and hyper param tuning this should be specified to increase train speed, when training full data pass ['None'] else specify token count, e.g 500_000
+                 --proxy_n_trials  -> this specifies the number of trials run by optuna, a baysian hp tuning library, it accpets any non negative or 0 value.
+                 --main_n_trials  -> same applies as proxy_n_trials, recommended use more for full model tuning.
+
+              gpt_model.py accepts args:
+                 --data_path  -> direscts to training data for model
+                 --scoring  -> this controls the type of scoring by the proxy model, arguments accepted are ['composite','Loss','Entropy']
+                 --schedule_type  -> this controls the type of curriculum the sceduler will produces, options are ['linear','tanh','sigmoid','log','linear']
+                 --curriculum  -> this toggles the curriculum on and off to allow for baseline and enhanced model training, options are ['on','off']
+                 --data_size -> data size specifies the number of tokens seen by the data and file output name, accepts None and any integer value
+
+              proxy main arguments:
+                 --data_pathq  -> specifies data path used for training
+                 --data_size   -> this controls how many tokens the model is exposed to, accepts None and and integer value.
+  
