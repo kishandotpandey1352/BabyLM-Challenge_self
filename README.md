@@ -10,8 +10,11 @@ Prerequisites:
 Local machine excercution:
 - If running locally, parse args are required.
 - Parse arguments for script are as follows:
+
       param_tuning.py  '--data_path tokenizers/10M_data_token.pkl --toggle_scheduler off --score_type Loss --n_tokens 500_000 --proxy_n_trials 2 --main_n_trials 3 --proxy_train on --main_train off' (inspect file for arg options)
+  
       gpt_model.py     '--data_path tokenizers/10M_data_token.pkl --scoring composite --schedule_type linear --curriculum on --data_size None ' (inspect file for arg options)
+  
       proxy_main.py    '--data_path tokenizers/10M_data_token.pkl --data_size None' (inspect file for arg options)
   
 - Models and data will be returned to the trained_models directory. Check script for specific saving mechanics.
