@@ -26,8 +26,8 @@ HPC Usage:
 - Create a conda enviroment with compatible packages (numpy, torch, sklearn, optuna, pandas) called babylm, or edit the activate command in bash files to you preferred enviroment. 
 
 General Instructions for Local Use:
-- scripts in the main and hps file can be run locally.
-- In order to run locally see the above 'local machine excercution' section above. The arguments avalible for each argument are as follows:
+- scripts in the 'main' and 'hps' file can be run locally.
+- In order to run locally, see the above 'local machine excercution' section for teminal commands. The arguments avalible for each argument are as follows:
   
               param_tuning.py accepts args:
                  --data_path   -> this directs the model to train ok specified data. In this repo it is found inside tokenisers, e.g 'tokenizers/10M_data_token.pkl'
