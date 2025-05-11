@@ -44,11 +44,10 @@ def proxy_objective(trial, holdout_loader, holdout_val_loader, score_loader, mod
     proxy_config.n_layers = 2
     
     proxy = ProxyTrain(holdout_loader, holdout_val_loader, score_loader, proxy_config, model)
-    proxy.train()
-
-    scores = proxy.LearnabilityScore(type='composite', alpha_scale=alpha_config)
-    val_loss = proxy.validate()
-    return val_loss
+    
+    train_loss, val_loss = proxy.train()
+    print(f"Validation Loss: {val_loss}")
+    return np.min(val_loss)
 
 def main_objective(trial, x, y, train_loader, val_loader, train_dataset, use_scheduler, scores):
     # in train configs
@@ -102,7 +101,7 @@ def main_objective(trial, x, y, train_loader, val_loader, train_dataset, use_sch
     )
 
     _, val_loss, _, _ = main.train(scheduler=scheduler)
-    return np.mean(val_loss)
+    return np.min(val_loss)
 
 if __name__=='__main__':
 
@@ -117,8 +116,6 @@ if __name__=='__main__':
     parser.add_argument("--main_n_trials", type=int, required=True)
     parser.add_argument("--proxy_train", type=str, required=True, choices=['on', 'off'])
     parser.add_argument("--main_train", type=str, required=True, choices=['on', 'off'])
-
-
 
     args = parser.parse_args()
 
