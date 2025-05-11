@@ -23,7 +23,7 @@ free -h
 nvidia-smi --query-compute-apps=pid,used_memory --format=csv
 
 # export PYTHONPATH to make sure python finds local packages (change for your user) so bash can find it
-export PYTHONPATH="/users/acp24mw/BabyLM-Challenge:$PYTHONPATH"
+export PYTHONPATH="/users/#username#/BabyLM-Challenge:$PYTHONPATH"
 
 # Run the script from BabyLM-Challenge
 python hps/param_tuning.py \
