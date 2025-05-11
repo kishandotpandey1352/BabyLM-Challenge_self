@@ -47,4 +47,5 @@ General Instructions for Local Use:
               proxy main arguments:
                  --data_pathq  -> specifies data path used for training
                  --data_size   -> this controls how many tokens the model is exposed to, accepts None and and integer value.
-  
+
+If there are any bugs or problems let me know, there are a lot of moving parts to the programs, and I will debug it as soon as I can. 
