@@ -1,0 +1,3 @@
+dos2unix: converting file scripts/proxys/proxy_10M_script.sh to Unix format ...
+sbatch: error: Batch script contains DOS line breaks (\r\n)
+sbatch: error: instead of expected UNIX line breaks (\n).
