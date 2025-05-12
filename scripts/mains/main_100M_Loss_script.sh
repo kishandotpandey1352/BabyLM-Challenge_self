@@ -15,9 +15,9 @@ conda activate babylm
 module load CUDA/11.7.0
 
 # Step into the project root
-cd /users/acp24mw/BabyLM-Challenge # change user specific for your user
+cd /users/{username}/BabyLM-Challenge # change user specific for your user
 # export PYTHONPATH to make sure python finds local packages (change for your user) so bash can find it
-export PYTHONPATH="/users/acp24mw/BabyLM-Challenge:$PYTHONPATH"
+export PYTHONPATH="/users/{username}/BabyLM-Challenge:$PYTHONPATH"
 export CUDA_VISIBLE_DEVICES=0
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export CUDA_LAUNCH_BLOCKING=1
