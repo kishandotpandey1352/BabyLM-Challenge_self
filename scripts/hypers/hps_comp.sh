@@ -16,9 +16,9 @@ module load CUDA/12.4
 
 
 # Step into the project root
-cd /users/{username}/BabyLM-Challenge # change user specific for your user
+cd /users/acp24kp/BabyLM-Challenge # change user specific for your user
 # export PYTHONPATH to make sure python finds local packages (change for your user) so bash can find it
-export PYTHONPATH="/users/{username}/BabyLM-Challenge:$PYTHONPATH"
+export PYTHONPATH="/users/acp24kp/BabyLM-Challenge:$PYTHONPATH"
 export CUDA_VISIBLE_DEVICES=0
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export CUDA_LAUNCH_BLOCKING=1
