@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/users/acp24kp/babylm/BabyLM-Challenge/main/proxy_main.py", line 27, in <module>
+    proxy = ProxyTrain(
+            ^^^^^^^^^^^
+TypeError: ProxyTrain.__init__() missing 1 required positional argument: 'model_cls'
