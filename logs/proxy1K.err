@@ -1,8 +1,0 @@
-Traceback (most recent call last):
-  File "/users/acp24kp/babylm/BabyLM-Challenge/main/proxy_main.py", line 24, in <module>
-    data = get_loaders(path, None)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/users/acp24kp/babylm/BabyLM-Challenge/data/loader.py", line 18, in get_loaders
-    tokens_np = np.array(tokens, dtype=np.int32) # too much precision?
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-ValueError: invalid literal for int() with base 10: 'h'
