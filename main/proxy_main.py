@@ -21,18 +21,22 @@ if __name__ == '__main__':
     data_size = args.data_size
 
     # Load tokenized data
-    data = get_loaders(path, None)
+    data = get_loaders(path, None, split_type='tune')
+    start = time.time()
 
     # Train the proxy model
     proxy = ProxyTrain(
         data['holdout_loader'],
+        data['holdout_val_loader'],
         data['score_loader'],
         ProxyConfig(),
-        GPT2Model
+        GPT2Model,
+
     )
     
-    start = time.time()
     proxy.train()
+    end = start - time.time()
+    print(f"Running time: {end}s")
     print(f"[info] Proxy{data_size} training complete. Time: {time.time() - start:.3f}s")
 
     # Save model weights
