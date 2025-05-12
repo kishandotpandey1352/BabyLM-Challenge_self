@@ -1,8 +1,3 @@
-
-
-
-
-
 from models.gpt import GenerateGPT, GPT2Block, GPT2Model, GPTTrainer
 from models.proxy_model import ProxyTrain
 from utils.configs import ModelConfig, TrainConfig, ProxyConfig
