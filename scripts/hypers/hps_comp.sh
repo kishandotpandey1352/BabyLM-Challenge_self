@@ -24,6 +24,13 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export CUDA_LAUNCH_BLOCKING=1
 
 
+
+nvidia-smi
+free -h
+nvidia-smi --query-compute-apps=pid,used_memory --format=csv
+nvidia-smi --loop=1000 > logs/gpu_usage.log &
+
+
 # Run the script from BabyLM-Challenge
 python hps/param_tuning.py \
     --data_path tokenizers/100M_data_token.pkl \
