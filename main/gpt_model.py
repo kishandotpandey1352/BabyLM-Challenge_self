@@ -14,6 +14,8 @@ import torch
 import time
 if __name__=='__main__':
 
+    print("cuda available:", torch.cuda.is_available())
+    print("device being used:", torch.device("cuda" if torch.cuda.is_available() else "cpu"))
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_path", type=str, required=True)
@@ -29,8 +31,7 @@ if __name__=='__main__':
     curricula = args.curriculum
     data_size = args.data_size
 
-        
-    data = get_loaders(path, None)
+    data = get_loaders(path, None, split_type='final')
     start = time.time()
     if curricula=='on':
         proxy_model = GPT2Model(ProxyConfig())
