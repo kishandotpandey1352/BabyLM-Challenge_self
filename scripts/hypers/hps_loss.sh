@@ -1,35 +1,34 @@
 #!/bin/bash
 
-#SBATCH --job-name=loss_main
-#SBATCH --output=logs/loss_hps.out
-#SBATCH --error=logs/loss_hps.err
+#SBATCH --job-name=ent_main
+#SBATCH --output=logs/ent_hps.out
+#SBATCH --error=logs/ent_hps.err
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=312G
+#SBATCH --mem=256G
 #SBATCH --time=30:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --partition=gpu
 
 source ~/.bashrc 
-conda activate babylm
-module load CUDA/11.7.0
+conda activate babylm-gpu
+module load CUDA/12.4
 
 
 # Step into the project root
-cd /users/#username#/BabyLM-Challenge # change user specific for your user
-
-nvidia-smi
-free -h
-nvidia-smi --query-compute-apps=pid,used_memory --format=csv
-
+cd /users/{username}/BabyLM-Challenge # change user specific for your user
 # export PYTHONPATH to make sure python finds local packages (change for your user) so bash can find it
-export PYTHONPATH="/users/#username#/BabyLM-Challenge:$PYTHONPATH"
+export PYTHONPATH="/users/{username}/BabyLM-Challenge:$PYTHONPATH"
+export CUDA_VISIBLE_DEVICES=0
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+export CUDA_LAUNCH_BLOCKING=1
+
 
 # Run the script from BabyLM-Challenge
 python hps/param_tuning.py \
     --data_path tokenizers/100M_data_token.pkl \
     --toggle_scheduler on \
-    --score_type loss \
+    --score_type Entropy \
     --n_tokens 500_000 \
     --proxy_n_trials 10 \
     --main_n_trials 50 \
