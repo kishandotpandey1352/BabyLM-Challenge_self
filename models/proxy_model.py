@@ -5,6 +5,7 @@ from tqdm import tqdm, trange
 from models.gpt import GPT2Model
 from utils.configs import ProxyConfig, TrainConfig
 from torch.nn import functional as F
+from torch.cuda.amp import autocast, GradScaler
 
 
 class ProxyTrain(torch.nn.Module):
@@ -23,7 +24,7 @@ class ProxyTrain(torch.nn.Module):
         self.optim = torch.optim.AdamW(self.train_model.parameters(), lr=configs.max_lr)
 
         # Loss for training uses default (mean)
-        self.Loss = torch.nn.CrossEntropyLoss()
+        self.Loss = torch.nn.CrossEntropyLoss(ignore_index=self.configs.pad if hasattr(self.configs, 'pad') else 0)
         # Model class for fresh instances
         self.model_cls = model_cls
         self.criterion = nn.CrossEntropyLoss()
@@ -33,6 +34,7 @@ class ProxyTrain(torch.nn.Module):
     def validate(self, val_loader):
         self.train_model.eval()
         total_loss = 0
+        
         with torch.no_grad():
             for x, y in val_loader:
                 x = x.to(self.device)
@@ -53,12 +55,16 @@ class ProxyTrain(torch.nn.Module):
         return total_loss /len(self.val_loader)
 
     def train(self):
+        print("Model device:", next(self.train_model.parameters()).device)
         hold_iter = iter(self.holdout_loader)
         total_loss = 0
         log_every=100
         loss_arr = []
         val_arr = []
-        for step in trange(1, self.configs.T_steps + 1, desc="Proxy training"):
+
+        scaler = GradScaler()
+        
+        for step in trange(1, self.configs.T_steps + 1, desc="Proxy training", miniters=1):
             try:
                 x, y = next(hold_iter)
             except StopIteration:
@@ -67,26 +73,33 @@ class ProxyTrain(torch.nn.Module):
 
             self.train_model.train()
             x, y = x.to(self.device), y.to(self.device)
-            print("max token ID:", x.max().item())
-            print("vocab size:", self.configs.vocab_size)
-            if torch.any(x >= self.configs.vocab_size):
-                print("ERROR: Found token ID >= vocab_size!")
-                print(f"Max token in batch: {x.max().item()}, Vocab size: {self.configs.vocab_size}")
-                exit(1)
-            logits = self.train_model(x)  # [B, L, V]
-            B, L, V = logits.shape
 
-            loss = self.Loss(logits.view(B * L, V), y.view(-1))
-            total_loss += loss
             self.optim.zero_grad()
-            loss.backward()
-            self.optim.step()
+            with autocast():
+                logits = self.train_model(x)  # [B, L, V]
+                B, L, V = logits.shape
+                loss = self.Loss(logits.view(B * L, V), y.view(-1))
+                total_loss += loss.item()
+
+            assert y.dtype==torch.long, f"y dtype must be long tensor, got {y.dtype}"
+            assert y.min() >= 0 and y.max() < self.configs.vocab_size, f"label out range, min = {y.min()}\tmax = {y.max()}\t vocab size = {self.configs.vocab_size}"
+            assert logits.shape[0] * logits.shape[1] == y.numel(), f"shape mismatch: logits = {logits.shape} vs target = {y.shape}"
+
+    
+            scaler.scale(loss).backward()
+            scaler.step(self.optim)
+            scaler.update()
+
+   
+            if step % 100 == 0:
+                torch.cuda.empty_cache()
+
             if step % log_every == 0 or step == self.configs.T_steps:
                 val_loss = self.validate(self.val_loader)
                 val_arr.append(val_loss)
                 avg_loss = total_loss/log_every
                 loss_arr.append(avg_loss)
-                print(f"Epoch {step/100} | Training Loss: {avg_loss:.3f} | Validation Loss: {val_loss:.3f}")
+                print(f"Step {step} | Training Loss: {avg_loss:.3f} | Validation Loss: {val_loss:.3f}")
                 total_loss=0
 
             if step % 1000 == 0:

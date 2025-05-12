@@ -23,7 +23,6 @@ def proxy_objective(trial, holdout_loader, holdout_val_loader, score_loader, mod
     max_lr_rate = trial.suggest_float("max_lr", 3e-4, 1e-3)
     dropout = trial.suggest_float("dropout", 0.0, 0.2, step=0.05)
 
-    T_steps = trial.suggest_categorical("T_steps", [500, 1000])
     t0 = trial.suggest_categorical("t0", [25, 50, 100])
     alpha_config = trial.suggest_float("alpha_scale", 0.0, 1.0)
 
@@ -33,15 +32,13 @@ def proxy_objective(trial, holdout_loader, holdout_val_loader, score_loader, mod
         batch_size=32,
         dropout=dropout,
         block_size=1024, 
-        T_steps=T_steps,
         t0=t0,
         alpha_scale=alpha_config,
-        epochs=5
     )
     # lower model configs for speed
-    proxy_config.n_head = 2
-    proxy_config.n_embd = 128 //2
-    proxy_config.n_layers = 2
+    proxy_config.n_head = 4
+    proxy_config.n_embd = 256 //2
+    proxy_config.n_layers = 4
     
     proxy = ProxyTrain(holdout_loader, holdout_val_loader, score_loader, proxy_config, model)
     
@@ -62,9 +59,9 @@ def main_objective(trial, x, y, train_loader, val_loader, train_dataset, use_sch
     model_config = ModelConfig()
     model_config.dropout=dropout
     model_config.block_size = 1024
-    model_config.n_embd = 128
-    model_config.n_head = 4
-    model_config.n_layers = 4
+    model_config.n_embd = 256
+    model_config.n_head = 8
+    model_config.n_layers = 8
 
     main_configs = TrainConfig(
         min_lr=min_lr,
@@ -72,7 +69,6 @@ def main_objective(trial, x, y, train_loader, val_loader, train_dataset, use_sch
         batch_size=64,
         max_len=1024,
         grad_accum_steps=grad_accum_steps,
-        epochs=5
     )
 
     # in sceduler
@@ -104,6 +100,8 @@ def main_objective(trial, x, y, train_loader, val_loader, train_dataset, use_sch
     return np.min(val_loss)
 
 if __name__=='__main__':
+    
+    print("[debug] CUDA available:", torch.cuda.is_available())
 
     repeat(seed=88)
 
@@ -129,9 +127,9 @@ if __name__=='__main__':
     main_n_trials = args.main_n_trials
 
     if n_tokens:
-        data = get_loaders(path, n_tokens)
+        data = get_loaders(path, n_tokens, split_type='tune')
     else:
-        data = get_loaders(path, None)
+        data = get_loaders(path, None, split_type='tune')
 
     scores=None
 
@@ -167,7 +165,7 @@ if __name__=='__main__':
                     
             main_study = optuna.create_study(direction='minimize', study_name=f"main_hps_{n_tokens}", load_if_exists=True)
             main_study.optimize(
-            lambda trial: main_objective(trial, data['X_train_tensor'], data['y_train_tensor'], data['train_loader'], data['val_loader'], data['train_dataset'], curricula, scores),
+            lambda trial: main_objective(trial, None, None, data['train_loader'], data['val_loader'], data['train_dataset'], curricula, scores),
             n_trials=main_n_trials, # for main model 50 +
             )
 

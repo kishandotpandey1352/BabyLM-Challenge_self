@@ -15,14 +15,20 @@ conda activate babylm
 module load CUDA/11.7.0
 
 # Step into the project root
-cd /users/#username#/BabyLM-Challenge # change user specific for your user
+cd /users/{username}/BabyLM-Challenge # change user specific for your user
+# export PYTHONPATH to make sure python finds local packages (change for your user) so bash can find it
+export PYTHONPATH="/users/{username}/BabyLM-Challenge:$PYTHONPATH"
+export CUDA_VISIBLE_DEVICES=0
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+export CUDA_LAUNCH_BLOCKING=1
+
+
 
 nvidia-smi
 free -h
 nvidia-smi --query-compute-apps=pid,used_memory --format=csv
+nvidia-smi --loop=1000 > logs/gpu_usage.log &
 
-# export PYTHONPATH to make sure python finds local packages (change for your user) so bash can find it
-export PYTHONPATH="/users/#username#/BabyLM-Challenge:$PYTHONPATH"
 
 python main/gpt_model.py \
     --data_path tokenizers/100M_data_token.pkl \
