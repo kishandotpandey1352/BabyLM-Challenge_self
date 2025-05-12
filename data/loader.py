@@ -5,25 +5,32 @@ from utils.configs import TrainConfig, ModelConfig
 import torch
 from torch.utils.data import DataLoader, TensorDataset
 
+class LazyTokenDataset(torch.utils.data.Dataset):
+    def __init__(self, tokens, block_size):
+        self.tokens = tokens
+        self.block_size = block_size
 
-def get_loaders(path, n_tokens):
-    #Handle prebuilt dataloader dictionaries (e.g., from dummy data .pkl)
-    if path.endswith(".pkl"):
-        with open(path, 'rb') as f:
-            loaded = pickle.load(f)
-        if isinstance(loaded, dict) and 'holdout_loader' in loaded:
-            print(f"[INFO] Loaded prebuilt DataLoader dictionary from: {path}")
-            return loaded
+    def __len__(self):
+        return len(self.tokens) - self.block_size
 
-    # Default path: assume it's a tokenized list of integer IDs
+    def __getitem__(self, idx):
+        x = self.tokens[idx:idx + self.block_size]
+        y = self.tokens[idx + 1:idx + 1 + self.block_size]
+
+    
+        assert len(x) == self.block_size and len(y) == self.block_size, f"Truncated sequence: x={len(x)}, y={len(y)}, block_size={self.block_size}"
+        return x, y
+
+
+def get_loaders(path, n_tokens, split_type='tune'):
     with open(path, 'rb') as f:
         data = pickle.load(f)
 
-    tokens = [token for sublist in data for token in sublist]  # flatten tokens
+    tokens = [token for sublist in data for token in sublist]
     if n_tokens is not None:
         tokens = tokens[:n_tokens]
 
-    tokens_np = np.array(tokens, dtype=np.int32)
+    tokens_tensor = torch.tensor(tokens, dtype=torch.long)
 
     model_configs = ModelConfig()
     train_configs = TrainConfig()
@@ -31,56 +38,50 @@ def get_loaders(path, n_tokens):
     block_size = model_configs.block_size
     batch_size = train_configs.batch_size
 
-    # Generate overlapping sequences
-    X = np.lib.stride_tricks.sliding_window_view(tokens_np, block_size)[:-1]
-    Y = np.lib.stride_tricks.sliding_window_view(tokens_np[1:], block_size)
+    dataset = LazyTokenDataset(tokens_tensor, block_size)
 
-    # Train/val/holdout splits
-    X_train_val, X_hold, y_train_val, y_hold = train_test_split(
-        X, Y, test_size=0.20, random_state=88
-    )
-    X_train_main, X_val, y_train_main, y_val = train_test_split(
-        X_train_val, y_train_val, test_size=0.20, random_state=88
-    )
-    X_hold, X_val_hold, y_hold, y_val_hold = train_test_split(
-        X_hold, y_hold, test_size=0.1, random_state=88
-    )
+    total_len = len(dataset)
+    if split_type == 'tune':
+        # Fractions based on relative logic
+        train_main_size = int(0.64 * total_len)  # 80% of 80%
+        val_size  = int(0.16 * total_len)  # 20% of 80%
+        hold_size = int(0.16 * total_len)  # 80% of 20%
+        hold_val_size = total_len - (train_main_size + val_size + hold_size)  # 4% (remainder)
 
-    # Convert to tensors
-    X_train_tensor = torch.tensor(X_train_main, dtype=torch.long)
-    y_train_tensor = torch.tensor(y_train_main, dtype=torch.long)
-    X_val_tensor = torch.tensor(X_val, dtype=torch.long)
-    y_val_tensor = torch.tensor(y_val, dtype=torch.long)
-    X_hold_tensor = torch.tensor(X_hold, dtype=torch.long)
-    y_hold_tensor = torch.tensor(y_hold, dtype=torch.long)
-    X_hold_val_tensor = torch.tensor(X_val_hold, dtype=torch.long)
-    y_hold_val_tensor = torch.tensor(y_val_hold, dtype=torch.long)
+        splits = [train_main_size, val_size, hold_size, hold_val_size]
 
-    # Build datasets
-    train_dataset = TensorDataset(X_train_tensor, y_train_tensor)
-    val_dataset = TensorDataset(X_val_tensor, y_val_tensor)
-    hold_dataset = TensorDataset(X_hold_tensor, y_hold_tensor)
-    hold_val_dataset = TensorDataset(X_hold_val_tensor, y_hold_val_tensor)
-    score_dataset = TensorDataset(X_train_tensor, y_train_tensor)  # optional
+        train_dataset, val_dataset, hold_dataset, holdout_val_dataset = torch.utils.data.random_split(
+            dataset, splits, generator=torch.Generator().manual_seed(88)
+        )
 
-    # Create data loaders
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=True)
-    holdout_loader = DataLoader(hold_dataset, batch_size=batch_size, shuffle=True)
-    holdout_val_loader = DataLoader(hold_val_dataset, batch_size=batch_size, shuffle=True)
-    score_loader = DataLoader(score_dataset, batch_size=batch_size, shuffle=True)
+        return {
+            'train_loader': DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True, num_workers=8, pin_memory=True, prefetch_factor=2),
+            'val_loader': DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last=True, num_workers=8, pin_memory=True,  prefetch_factor=2),
+            'holdout_loader': DataLoader(hold_dataset, batch_size=batch_size, shuffle=True, drop_last=True, num_workers=8, pin_memory=True, prefetch_factor=2),
+            'holdout_val_loader': DataLoader(holdout_val_dataset, batch_size=batch_size, shuffle=False, drop_last=True, num_workers=8, pin_memory=True,  prefetch_factor=2),
+            'train_dataset': train_dataset,
+            'val_dataset': val_dataset,
+            'hold_dataset': hold_dataset,
+            'holdout_val_dataset': holdout_val_dataset,
+            'score_loader': DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True, num_workers=8, pin_memory=True,  prefetch_factor=2),
+            'score_dataset': train_dataset
+        }
 
-    return {
-        'X_train_tensor': X_train_tensor,
-        'y_train_tensor': y_train_tensor,
-        'train_loader': train_loader,
-        'val_loader': val_loader,
-        'holdout_loader': holdout_loader,
-        'holdout_val_loader': holdout_val_loader,
-        'score_loader': score_loader,
-        'train_dataset': train_dataset,
-        'val_dataset': val_dataset,
-        'hold_dataset': hold_dataset,
-        'holdout_val_dataset': hold_val_dataset,
-        'score_dataset': score_dataset
-    }
+    elif split_type == 'final':
+        # Just train/val, maximize training
+        val_size = int(0.05 * total_len)
+        train_size = total_len - val_size
+
+        train_dataset, val_dataset = torch.utils.data.random_split(
+            dataset, [train_size, val_size], generator=torch.Generator().manual_seed(88)
+        )
+
+        return {
+            'train_loader': DataLoader(train_dataset, batch_size=batch_size, shuffle=True, drop_last=True, num_workers=8, pin_memory=True),
+            'val_loader': DataLoader(val_dataset, batch_size=batch_size, shuffle=False, drop_last=True, num_workers=8, pin_memory=True),
+            'train_dataset': train_dataset,
+            'val_dataset': val_dataset
+        }
+
+    else:
+        raise ValueError(f"Unknown split_mode: {split_type}")
