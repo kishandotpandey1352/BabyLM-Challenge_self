@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#SBATCH --job-name=ent_main
-#SBATCH --output=logs/ent_hps.out
-#SBATCH --error=logs/ent_hps.err
+#SBATCH --job-name=loss_main
+#SBATCH --output=logs/loss_hps.out
+#SBATCH --error=logs/loss_hps.err
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=256G
@@ -14,6 +14,7 @@ source ~/.bashrc
 conda activate babylm-gpu
 module load CUDA/12.4
 
+# 
 
 # Step into the project root
 cd /users/{username}/BabyLM-Challenge # change user specific for your user
@@ -28,7 +29,7 @@ export CUDA_LAUNCH_BLOCKING=1
 python hps/param_tuning.py \
     --data_path tokenizers/100M_data_token.pkl \
     --toggle_scheduler on \
-    --score_type Entropy \
+    --score_type Loss \
     --n_tokens 500_000 \
     --proxy_n_trials 10 \
     --main_n_trials 50 \
