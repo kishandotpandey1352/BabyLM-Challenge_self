@@ -37,7 +37,12 @@ class ProxyTrain(torch.nn.Module):
             for x, y in val_loader:
                 x = x.to(self.device)
                 y = y.to(self.device)
-
+                print("max token ID:", x.max().item())
+                print("vocab size:", self.configs.vocab_size)
+                if torch.any(x >= self.configs.vocab_size):
+                    print("ERROR: Found token ID >= vocab_size!")
+                    print(f"Max token in batch: {x.max().item()}, Vocab size: {self.configs.vocab_size}")
+                    exit(1)
                 logits = self.train_model(x)
                 b,t,v = logits.shape
                 logits=logits.view(b*t, v)
@@ -62,6 +67,12 @@ class ProxyTrain(torch.nn.Module):
 
             self.train_model.train()
             x, y = x.to(self.device), y.to(self.device)
+            print("max token ID:", x.max().item())
+            print("vocab size:", self.configs.vocab_size)
+            if torch.any(x >= self.configs.vocab_size):
+                print("ERROR: Found token ID >= vocab_size!")
+                print(f"Max token in batch: {x.max().item()}, Vocab size: {self.configs.vocab_size}")
+                exit(1)
             logits = self.train_model(x)  # [B, L, V]
             B, L, V = logits.shape
 

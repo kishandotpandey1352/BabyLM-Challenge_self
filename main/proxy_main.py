@@ -26,10 +26,11 @@ if __name__ == '__main__':
     # Train the proxy model
     proxy = ProxyTrain(
         data['holdout_loader'],
+        data['holdout_val_loader'],
         data['score_loader'],
         ProxyConfig(),
         GPT2Model
-    )
+        )
     
     start = time.time()
     proxy.train()

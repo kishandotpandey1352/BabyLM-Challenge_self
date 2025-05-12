@@ -27,6 +27,7 @@ nvidia-smi --query-compute-apps=pid,used_memory --format=csv
 
 # Make local project discoverable
 export PYTHONPATH="/users/acp24kp/babylm/BabyLM-Challenge:$PYTHONPATH"
+export CUDA_LAUNCH_BLOCKING=1
 
 # Run with passed arguments
 python main/proxy_main.py \
