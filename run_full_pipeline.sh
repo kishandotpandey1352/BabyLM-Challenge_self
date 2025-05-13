@@ -30,5 +30,7 @@ echo "Waiting for proxy job to finish..."
 # Optional: add polling here if you want auto-wait logic
 
 # === Submit Main Training (Composite Scoring) ===
+dos2unix scripts/mains/main_10M_comp_script.sh
+chmod +x scripts/mains/main_10M_comp_script.sh
 echo "Submitting main model training job with composite scoring..."
 sbatch scripts/mains/main_10M_comp_script.sh
