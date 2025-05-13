@@ -12,7 +12,7 @@ class hfWrapper(PreTrainedModel):
         return self.model(input_ids)
     
 def hfConfig(configs: ModelConfig):
-    return GPT2Config(
+    cfg = GPT2Config(
         vocab_size=configs.vocab_size,
         n_positions=configs.block_size,
         n_ctx=configs.block_size,
@@ -22,5 +22,7 @@ def hfConfig(configs: ModelConfig):
         resid_pdrop=configs.dropout,
         embd_pdrop=configs.dropout,
         attn_pdrop=configs.dropout,
-        use_cache=False  # opt
+        use_cache=False
     )
+    cfg.block_size = configs.block_size
+    return cfg
