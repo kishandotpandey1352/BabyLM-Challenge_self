@@ -26,14 +26,23 @@ if __name__=='__main__':
     curricula = args.curriculum
     data_size = args.data_size
 
-    data = get_loaders(path, None, split_type='final')
+    # data = get_loaders(path, None, split_type='final')
+    data = get_loaders(path, None)
+    print("[DEBUG] Keys in loaded data:", data.keys())
     start = time.time()
     if curricula=='on':
         proxy_model = GPT2Model(ProxyConfig())
         proxy_model.load_state_dict(torch.load("trained_models/proxy_model.pt", map_location='cpu'))
         proxy_model.eval()
 
-        proxy = ProxyTrain(data['holdout_loader'], data['score_loader'], ProxyConfig(), GPT2Model)
+        # proxy = ProxyTrain(data['holdout_loader'], data['score_loader'], ProxyConfig(), GPT2Model)
+        proxy = ProxyTrain(
+                    data['holdout_loader'],
+                    data['holdout_val_loader'],
+                    data['score_loader'],
+                    ProxyConfig(),
+                    GPT2Model
+                )
         proxy.train_model = proxy_model
 
         all_scores = proxy.LearnabilityScore(type=score_type)
