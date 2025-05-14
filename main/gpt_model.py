@@ -47,7 +47,7 @@ if __name__=='__main__':
 
         all_scores = proxy.LearnabilityScore(type=score_type)
         torch.save(all_scores,f"logs/proxy_scores_{score_type}.pt")
-        score = all_scores[score_type]
+        score = all_scores
 
         train_config = TrainConfig()
         train_config.total_steps = train_config.epochs * len(data['train_loader'])
@@ -72,8 +72,8 @@ if __name__=='__main__':
 
 
     train_loss, val_loss, alphas, lambdas = main.train(scheduler=scheduler)
-    end =time.time() - start
-    print(f"Main{data_size} training complete. Time: {time.time() - start:.3f}s")
+    duration =time.time() - start
+    print(f"Main{data_size} training complete. Time: {duration:.3f}s")
     torch.save(main.model.state_dict(), f"trained_models/main_{score_type}_{data_size}model_weights.pt")
     torch.save(main, f"trained_models/full_{score_type}_{data_size}main_model.pt")
 
