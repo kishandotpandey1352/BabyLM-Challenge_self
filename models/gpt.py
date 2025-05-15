@@ -7,6 +7,7 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader, TensorDataset
 from curriculum.scheduler import Scheduler
 from utils.configs import ModelConfig, TrainConfig
+from torch.cuda.amp import autocast, GradScaler
 import csv
 import os
 
@@ -113,6 +114,9 @@ class GPT2Model(nn.Module):
         b, t = x.size()
         tokn_embd = self.token_embd(x)
         posn_idcs = torch.arange(t, device=x.device).unsqueeze(0).expand(b,t)
+        assert x.size(1) <= self.posn_embd.num_embeddings, (
+            f"Seq length {x.size(1)} exceeds block size {self.posn_embd.num_embeddings}"
+        )
         posn_embd = self.posn_embd(posn_idcs)
 
         x = tokn_embd + posn_embd
@@ -120,7 +124,6 @@ class GPT2Model(nn.Module):
         x = self.blocks(x)
         x = self.fln(x) # final linear layer
         return self.proj(x) # project back to (enbedding size, vocab size)
-
 
 
 class GPTTrainer:
@@ -156,9 +159,9 @@ class GPTTrainer:
         # lyponav regularisation
         self.L0 = None # get initial val loss
         self.prev_val_loss = None # get prev val loss
-        self.lambda_ema = None
-        self.beta_ema = 0.9
         self.lambdas = [] # track lambda of leraning over time
+
+        self.scaler = GradScaler()
 
 
     def step(self, inputs, targets):
@@ -166,20 +169,28 @@ class GPTTrainer:
         inputs = inputs.to(self.device)
         targets = targets.to(self.device)
 
-        logits = self.model(inputs)
-        b, t, v = logits.shape
-        logits = logits.view(b * t, v)
-        targets = targets.view(b * t)
+        with autocast():
+            logits = self.model(inputs)
+            b, t, v = logits.shape
+            logits = logits.view(b * t, v)
+            targets = targets.view(b * t)
 
-        loss = self.criterion(logits, targets) / self.train_config.grad_accum_steps
-        loss.backward()
+            loss = self.criterion(logits, targets) / self.train_config.grad_accum_steps
+
+        self.scaler.scale(loss).backward()
+    
 
         if (self.step_count + 1) % self.train_config.grad_accum_steps == 0:
-            self.optim.step()
+            self.scaler.step(self.optim)
+            self.scaler.update()
             self.schedule.step()
             self.optim.zero_grad()
 
         self.step_count += 1
+        if self.step_count % 1000 == 0:
+            print(f"[GPU] memory allocated = {torch.cuda.memory_allocated()/1e6:.2f}")
+            print(f"[GPU] memory reserved = {torch.cuda.memory_reserved()/1e6:.2f}")
+
 
         if self.train_config.save_checkpoints and (self.check_points_dir and self.step_count % self.train_config.save_every_steps == 0):
             checkpoint = {
@@ -195,12 +206,17 @@ class GPTTrainer:
             print(f"Step {self.step_count:04d} | Loss: {loss.item():.4f}")
         return loss.item()
 
-    def validate(self, val_loader):
+    def validate(self, val_loader, max_batches=50):
         self.model.eval()
+        n=0
+
+        print(f"[debug] Lenght of validation loader = {len(val_loader)}")
 
         total_loss = 0
         with torch.no_grad():
-            for x, y in val_loader:
+            for i, (x, y) in enumerate(val_loader):
+                if max_batches is not None and i>=max_batches:
+                    break
                 x = x.to(self.device)
                 y = y.to(self.device)
 
@@ -211,9 +227,12 @@ class GPTTrainer:
 
                 loss = self.criterion(logits, y)
                 total_loss += loss.item()
-        return total_loss / len(val_loader)
+                n+=1
+        return total_loss / n
 
     def train(self, scheduler=None):
+        print("Model device:", next(self.model.parameters()).device)
+
         if scheduler is None:
             print("Running Baseline Model")
         else:
@@ -225,6 +244,7 @@ class GPTTrainer:
         val_loss_arr = []
         alpha_arr = []
         lambdas_arr = []
+
 
         for epoch in range(self.train_config.epochs):
             total_loss = 0.
@@ -245,7 +265,7 @@ class GPTTrainer:
             else:
                 print(f"Epoch {epoch + 1} | Starting warmup...")
 
-            for x, y in tqdm(train_loader, desc=f"Epoch {epoch+1}, alpha {alpha}"):
+            for x, y in tqdm(train_loader, desc=f"Epoch {epoch+1}, alpha {alpha}", miniters=100):
                 loss_val = self.step(x, y)
                 total_loss += loss_val
                 n_batches += 1
@@ -343,7 +363,7 @@ class GenerateGPT:
                 logits = self.model(input_tensor)
                 next_token_logits = logits[0, -1, :]
 
-                # Scale logits by temp
+                # ccale logits w/ temp
                 next_token_logits = next_token_logits / temperature
 
                 # apply top-k/top-p filtering if required
