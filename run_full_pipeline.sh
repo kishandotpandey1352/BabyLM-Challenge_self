@@ -15,19 +15,9 @@
 source ~/.bashrc
 conda activate babylm
 
-cd /users/acp24kp/BabyLM-Challenge
-
 # === Fix line endings and make script executable ===
 dos2unix scripts/proxys/proxy_10M_script.sh
 chmod +x scripts/proxys/proxy_10M_script.sh
-
-# === Run Proxy Training ===
-echo "Submitting proxy model training job..."
-sbatch scripts/proxys/proxy_10M_script.sh tokenizers/10M_data_token.pkl 10M
-
-# === Wait for proxy job to finish before continuing ===
-echo "Waiting for proxy job to finish..."
-# Optional: add polling here if you want auto-wait logic
 
 # === Submit Main Training (Composite Scoring) ===
 dos2unix scripts/mains/main_10M_comp_script.sh

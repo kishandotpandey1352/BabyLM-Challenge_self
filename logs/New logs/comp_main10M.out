@@ -1,0 +1,30 @@
+Tue May 13 17:05:05 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.144.03             Driver Version: 550.144.03     CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-80GB          On  |   00000000:C1:00.0 Off |                    0 |
+| N/A   29C    P0             59W /  500W |       1MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+              total        used        free      shared  buff/cache   available
+Mem:           503G         46G        237G        1.5G        218G        453G
+Swap:           31G        240M         31G
+pid, used_gpu_memory [MiB]
+cuda available: True
+device being used: cuda
+[DEBUG] Keys in loaded data: dict_keys(['train_loader', 'val_loader', 'holdout_loader', 'holdout_val_loader', 'train_dataset', 'val_dataset', 'hold_dataset', 'holdout_val_dataset', 'score_loader', 'score_dataset'])
+[DEBUG] Proxy model on: cuda:0
+[DEBUG] Early model on: cuda:0
+[DEBUG] Late model on: cuda:0
