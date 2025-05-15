@@ -31,7 +31,7 @@ nvidia-smi --loop=1000 > logs/gpu_usage.log &
 
 python main/gpt_model.py \
     --data_path tokenizers/100M_data_token.pkl \
-    --scoring composite \
+    --scoring comp_score \
     --schedule_type sigmoid \
     --curriculum off \
     --data_size 100M

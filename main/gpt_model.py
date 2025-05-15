@@ -57,7 +57,7 @@ if __name__=='__main__':
             scores=score,
             configs=train_config,
             schedule_type=schedule_type,
-            shuffle=True,      
+            shuffle=True,     
             )
     else:
         scheduler=None
