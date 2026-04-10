@@ -1,0 +1,5 @@
+# Ensure the .tml file is uploaded to the HPC
+conda env create -f environment.yml
+# Activate the env
+conda activate gptcurriculum
+

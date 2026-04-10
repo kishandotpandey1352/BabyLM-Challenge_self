@@ -11,7 +11,13 @@ from . import (
     optimum_lm,
     textsynth,
     vllm_causallms,
+    custom_gpt2
 )
+
+MODEL_REGISTRY = {}
+
+from .custom_gpt2 import CustomGPT2
+MODEL_REGISTRY["custom_gpt2"] = CustomGPT2
 
 
 # TODO: implement __all__

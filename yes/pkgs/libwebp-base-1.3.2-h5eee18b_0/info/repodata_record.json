@@ -1,0 +1,21 @@
+{
+  "build": "h5eee18b_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [
+    "libwebp 1.3.2"
+  ],
+  "depends": [
+    "libgcc-ng >=11.2.0"
+  ],
+  "fn": "libwebp-base-1.3.2-h5eee18b_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "9179fc7baefa1e027f572edbc519d805",
+  "name": "libwebp-base",
+  "sha256": "3a79101d96374cce0cdb4a6e6e699379930b6b3bcb4e5e2a23a47949a8958718",
+  "size": 396368,
+  "subdir": "linux-64",
+  "timestamp": 1694776944000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libwebp-base-1.3.2-h5eee18b_0.conda",
+  "version": "1.3.2"
+}

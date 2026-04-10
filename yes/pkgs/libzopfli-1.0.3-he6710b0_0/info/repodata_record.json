@@ -1,0 +1,20 @@
+{
+  "build": "he6710b0_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.3.0",
+    "libstdcxx-ng >=7.3.0"
+  ],
+  "fn": "libzopfli-1.0.3-he6710b0_0.conda",
+  "license": "Apache-2.0",
+  "md5": "8671895f71c9046f38b814f8662226f5",
+  "name": "libzopfli",
+  "sha256": "b7d6dee99369d2e602bb0901e7d468db3d6567a4af3666b75213ef268c560d39",
+  "size": 174889,
+  "subdir": "linux-64",
+  "timestamp": 1593197391000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libzopfli-1.0.3-he6710b0_0.conda",
+  "version": "1.0.3"
+}

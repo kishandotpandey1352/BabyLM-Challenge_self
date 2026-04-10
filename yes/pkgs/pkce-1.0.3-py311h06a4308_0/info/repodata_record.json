@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "pkce-1.0.3-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "9b1d5a6b6b5bbd7c47bac1276eb4a86c",
+  "name": "pkce",
+  "sha256": "83d6c36dd6d1aa3233f2526d4419903319424f507231a9c1e03a2c0a6ba38e5e",
+  "size": 9066,
+  "subdir": "linux-64",
+  "timestamp": 1690384876000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/pkce-1.0.3-py311h06a4308_0.conda",
+  "version": "1.0.3"
+}

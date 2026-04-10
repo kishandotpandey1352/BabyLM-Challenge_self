@@ -1,0 +1,20 @@
+{
+  "build": "h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "liblief-0.12.3-h6a678d5_0.conda",
+  "license": "Apache-2.0",
+  "md5": "9996383fc2561614e4d54490aea33f8e",
+  "name": "liblief",
+  "sha256": "35873dd7c288d83b738fd4597cb0ee1466dab75b2e1d43710d540a804da3c42d",
+  "size": 2024451,
+  "subdir": "linux-64",
+  "timestamp": 1670876577000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/liblief-0.12.3-h6a678d5_0.conda",
+  "version": "0.12.3"
+}

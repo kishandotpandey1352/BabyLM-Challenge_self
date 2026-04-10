@@ -1,0 +1,19 @@
+{
+  "build": "h7b6447c_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.3.0"
+  ],
+  "fn": "jxrlib-1.1-h7b6447c_2.conda",
+  "license": "BSD-2-Clause",
+  "md5": "3cc305f3788177c8ea28088590ab75a1",
+  "name": "jxrlib",
+  "sha256": "26d8bdd124ba25a45425c18b41d9765db810deba870d55082104e011a4c6d7be",
+  "size": 228075,
+  "subdir": "linux-64",
+  "timestamp": 1593197090000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/jxrlib-1.1-h7b6447c_2.conda",
+  "version": "1.1"
+}

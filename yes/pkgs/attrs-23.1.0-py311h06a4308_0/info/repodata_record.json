@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "attrs-23.1.0-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "47523ff7d4152ca3c652fcce135b34e9",
+  "name": "attrs",
+  "sha256": "d6c8d1f5328a95c8c039a7eb91724ff1e006696e4c4154481bf7b0b67bd31888",
+  "size": 165187,
+  "subdir": "linux-64",
+  "timestamp": 1695717917000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/attrs-23.1.0-py311h06a4308_0.conda",
+  "version": "23.1.0"
+}

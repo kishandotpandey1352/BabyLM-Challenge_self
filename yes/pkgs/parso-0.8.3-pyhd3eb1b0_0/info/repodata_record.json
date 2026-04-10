@@ -1,0 +1,21 @@
+{
+  "build": "pyhd3eb1b0_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/noarch",
+  "constrains": [],
+  "depends": [
+    "python >=3.6"
+  ],
+  "fn": "parso-0.8.3-pyhd3eb1b0_0.conda",
+  "license": "MIT",
+  "md5": "c6f0f6219bf5ce2b510ef4b75cbc3e01",
+  "name": "parso",
+  "noarch": "python",
+  "package_type": "noarch_python",
+  "sha256": "e6be6d3a4fec00fc3699a716bbbf48779ef4ab9149fa92df71d9a03d69a66a84",
+  "size": 71964,
+  "subdir": "noarch",
+  "timestamp": 1641458670000,
+  "url": "https://repo.anaconda.com/pkgs/main/noarch/parso-0.8.3-pyhd3eb1b0_0.conda",
+  "version": "0.8.3"
+}

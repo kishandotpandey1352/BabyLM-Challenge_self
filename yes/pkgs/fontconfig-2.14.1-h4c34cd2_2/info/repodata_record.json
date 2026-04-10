@@ -1,0 +1,24 @@
+{
+  "build": "h4c34cd2_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "expat >=2.4.9,<3.0a0",
+    "freetype >=2.10.4,<3.0a0",
+    "libgcc-ng >=11.2.0",
+    "libuuid >=1.41.5,<2.0a0",
+    "libxml2 >=2.10.3,<2.11.0a0",
+    "zlib >=1.2.13,<1.3.0a0"
+  ],
+  "fn": "fontconfig-2.14.1-h4c34cd2_2.conda",
+  "license": "MIT",
+  "md5": "f0b472f5b544f8d57beb09ed4a2932e1",
+  "name": "fontconfig",
+  "sha256": "25ebd0146f136dcbb923d45f184366bae0ffc06c3d55dd6ade2cb6ba9c3af000",
+  "size": 288248,
+  "subdir": "linux-64",
+  "timestamp": 1679578197000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/fontconfig-2.14.1-h4c34cd2_2.conda",
+  "version": "2.14.1"
+}

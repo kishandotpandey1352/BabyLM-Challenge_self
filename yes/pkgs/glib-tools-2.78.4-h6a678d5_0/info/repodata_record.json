@@ -1,0 +1,21 @@
+{
+  "build": "h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libglib 2.78.4 hdc74915_0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "glib-tools-2.78.4-h6a678d5_0.conda",
+  "license": "LGPL-2.1-or-later",
+  "md5": "3dbe6227cd59818dca9afb75ccb70708",
+  "name": "glib-tools",
+  "sha256": "5b0649f460e2f0f3e2dd701c81fdafe2640541674966e37b31a96bd7e832cdab",
+  "size": 117997,
+  "subdir": "linux-64",
+  "timestamp": 1708031685000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/glib-tools-2.78.4-h6a678d5_0.conda",
+  "version": "2.78.4"
+}

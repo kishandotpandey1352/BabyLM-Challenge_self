@@ -1,0 +1,21 @@
+{
+  "build": "h5eee18b_7",
+  "build_number": 7,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libbrotlidec 1.0.9 h5eee18b_7",
+    "libbrotlienc 1.0.9 h5eee18b_7",
+    "libgcc-ng >=11.2.0"
+  ],
+  "fn": "brotli-bin-1.0.9-h5eee18b_7.conda",
+  "license": "MIT",
+  "md5": "1cc9b5d3edf7bf3247941f4b5c083242",
+  "name": "brotli-bin",
+  "sha256": "ea5d7916a2856e0b0f004cf7a181430df3f22f72eedb391f96c030b237d1f1a8",
+  "size": 19069,
+  "subdir": "linux-64",
+  "timestamp": 1659616170000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/brotli-bin-1.0.9-h5eee18b_7.conda",
+  "version": "1.0.9"
+}

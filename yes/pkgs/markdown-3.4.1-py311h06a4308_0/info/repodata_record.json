@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "markdown-3.4.1-py311h06a4308_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "ffa59d4d0208a2c9b3c394d100d6d930",
+  "name": "markdown",
+  "sha256": "913b52b69fd5d0ba4e8f6580542a44805c50926635bfd1815022e0a65ae6b964",
+  "size": 168182,
+  "subdir": "linux-64",
+  "timestamp": 1676837095000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/markdown-3.4.1-py311h06a4308_0.conda",
+  "version": "3.4.1"
+}

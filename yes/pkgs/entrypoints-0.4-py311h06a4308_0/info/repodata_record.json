@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "entrypoints-0.4-py311h06a4308_0.conda",
+  "license": "MIT License",
+  "md5": "476078025205b930f39418fae598d318",
+  "name": "entrypoints",
+  "sha256": "86a29c39673e540da59c8df6be6c688188355daf3d14461806f43ddde41a4c2a",
+  "size": 17822,
+  "subdir": "linux-64",
+  "timestamp": 1676823330000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/entrypoints-0.4-py311h06a4308_0.conda",
+  "version": "0.4"
+}

@@ -1,0 +1,19 @@
+{
+  "build": "h7f8727e_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.5.0"
+  ],
+  "fn": "libxcb-1.15-h7f8727e_0.conda",
+  "license": "",
+  "md5": "ada518dcadd6aaee9aae47ba9a671553",
+  "name": "libxcb",
+  "sha256": "9feb197125e4803d702cfdf10116c856e381b59f845b3346f50cb10e9bb8c643",
+  "size": 517527,
+  "subdir": "linux-64",
+  "timestamp": 1652448233000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libxcb-1.15-h7f8727e_0.conda",
+  "version": "1.15"
+}

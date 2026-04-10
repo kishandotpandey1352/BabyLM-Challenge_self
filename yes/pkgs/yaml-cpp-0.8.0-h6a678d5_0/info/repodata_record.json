@@ -1,0 +1,20 @@
+{
+  "build": "h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "yaml-cpp-0.8.0-h6a678d5_0.conda",
+  "license": "MIT",
+  "md5": "8a9da2caf30ff77386a7b11ac2fdf498",
+  "name": "yaml-cpp",
+  "sha256": "a57449dedb1c4ad98f578908ff5204763732e83b6f79fdbe3fd699994a8f1064",
+  "size": 621638,
+  "subdir": "linux-64",
+  "timestamp": 1698774661000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/yaml-cpp-0.8.0-h6a678d5_0.conda",
+  "version": "0.8.0"
+}

@@ -1,0 +1,22 @@
+{
+  "build": "py311h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "liblief 0.12.3 h6a678d5_0",
+    "libstdcxx-ng >=11.2.0",
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "py-lief-0.12.3-py311h6a678d5_0.conda",
+  "license": "Apache-2.0",
+  "md5": "cfb50b26cb3b361c6dd530fe2e464e8c",
+  "name": "py-lief",
+  "sha256": "523076c5cfa56c1485fc40e4c9acc75fd022d4724e930d6ac52ca468cb096ed6",
+  "size": 1332632,
+  "subdir": "linux-64",
+  "timestamp": 1676841196000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/py-lief-0.12.3-py311h6a678d5_0.conda",
+  "version": "0.12.3"
+}

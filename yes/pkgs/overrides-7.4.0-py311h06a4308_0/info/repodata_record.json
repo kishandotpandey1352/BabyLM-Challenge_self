@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "overrides-7.4.0-py311h06a4308_0.conda",
+  "license": "Apache-2.0",
+  "md5": "52fadb1fcb2ed672a81d6e04cde5e728",
+  "name": "overrides",
+  "sha256": "65680a34b1602aafaaf04c22f5e023c3b3cd8b709f311aecaa0f410aeb3fdd62",
+  "size": 37189,
+  "subdir": "linux-64",
+  "timestamp": 1699371264000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/overrides-7.4.0-py311h06a4308_0.conda",
+  "version": "7.4.0"
+}

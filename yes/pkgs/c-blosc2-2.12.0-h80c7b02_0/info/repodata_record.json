@@ -1,0 +1,23 @@
+{
+  "build": "h80c7b02_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "lz4-c >=1.9.4,<1.10.0a0",
+    "zlib-ng >=2.0.7,<2.1.0a0",
+    "zstd >=1.5.2,<1.6.0a0"
+  ],
+  "fn": "c-blosc2-2.12.0-h80c7b02_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "a99d0fcf5918fc2cacf0b7bb865087f9",
+  "name": "c-blosc2",
+  "sha256": "12056bc7dba4a536e1b8c04e1fcc314b7b7c1c63aec1a32de3420f62877a3914",
+  "size": 349337,
+  "subdir": "linux-64",
+  "timestamp": 1705431463000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/c-blosc2-2.12.0-h80c7b02_0.conda",
+  "version": "2.12.0"
+}

@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "jmespath-1.0.1-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "dd833fec7a9626ac493ac6ec34e7f8f4",
+  "name": "jmespath",
+  "sha256": "9feea01cac47a5bb6344a1b83c4ffa150064c7b71773d712e7626f527d3a3132",
+  "size": 49622,
+  "subdir": "linux-64",
+  "timestamp": 1700144635000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/jmespath-1.0.1-py311h06a4308_0.conda",
+  "version": "1.0.1"
+}

@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "cloudpickle-2.2.1-py311h06a4308_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "b13b2793408c93fa5b3b61e9507e6325",
+  "name": "cloudpickle",
+  "sha256": "421be3d65371ec9427dd68376f2637a22778c4b2a22478717f9256879415a4f1",
+  "size": 52528,
+  "subdir": "linux-64",
+  "timestamp": 1683040113000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/cloudpickle-2.2.1-py311h06a4308_0.conda",
+  "version": "2.2.1"
+}

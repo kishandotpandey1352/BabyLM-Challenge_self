@@ -3,10 +3,8 @@ import random
 from tqdm import tqdm
 
 from lm_eval.api.model import LM
-from lm_eval.api.registry import register_model
 
 
-@register_model("dummy")
 class DummyLM(LM):
     def __init__(self) -> None:
         super().__init__()

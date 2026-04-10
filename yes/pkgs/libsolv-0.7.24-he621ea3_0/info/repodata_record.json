@@ -1,0 +1,22 @@
+{
+  "build": "he621ea3_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "pcre2 >=10.42,<10.43.0a0",
+    "zlib >=1.2.13,<1.3.0a0"
+  ],
+  "fn": "libsolv-0.7.24-he621ea3_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "a4897b23ef9061b4da80e28aa20d5964",
+  "name": "libsolv",
+  "sha256": "824a8a9f12982c34e65863b445374196e0a7acb66dce92d7cf8cace803164e24",
+  "size": 504124,
+  "subdir": "linux-64",
+  "timestamp": 1694099547000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libsolv-0.7.24-he621ea3_0.conda",
+  "version": "0.7.24"
+}

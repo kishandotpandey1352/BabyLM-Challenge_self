@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "fsspec-2023.10.0-py311h06a4308_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "eba133cd6def5c5cd81426d16a83cdd3",
+  "name": "fsspec",
+  "sha256": "e5b58382b6ac0163636944518c0db5dd6006813b47eb09a44e93fbd0f8451423",
+  "size": 372761,
+  "subdir": "linux-64",
+  "timestamp": 1701286605000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/fsspec-2023.10.0-py311h06a4308_0.conda",
+  "version": "2023.10.0"
+}

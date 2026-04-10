@@ -12,7 +12,7 @@
 #SBATCH --partition=gpu
 
 source ~/.bashrc 
-conda activate babylm-gpu
+conda activate babylm
 module load CUDA/12.4
 
 

@@ -1,0 +1,20 @@
+{
+  "build": "h295c915_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.5.0",
+    "libstdcxx-ng >=7.5.0"
+  ],
+  "fn": "lerc-3.0-h295c915_0.conda",
+  "license": "Apache-2.0",
+  "md5": "b97309770412f10bed8d9448f6f98f87",
+  "name": "lerc",
+  "sha256": "e9b84d986a46d22c6a1713b267f98ed3adbd486e423d2be74a3b42416e5b3e60",
+  "size": 200516,
+  "subdir": "linux-64",
+  "timestamp": 1635523146000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/lerc-3.0-h295c915_0.conda",
+  "version": "3.0"
+}

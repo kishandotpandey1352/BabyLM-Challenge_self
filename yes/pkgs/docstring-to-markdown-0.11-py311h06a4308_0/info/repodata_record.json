@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "docstring-to-markdown-0.11-py311h06a4308_0.conda",
+  "license": "LGPL-2.1-or-later",
+  "md5": "54e318c57015dc24d1af2043668ef63b",
+  "name": "docstring-to-markdown",
+  "sha256": "74d8e9f12106bcb5adcee057321aa216981c291233a67274c6fb01b9ca643418",
+  "size": 35367,
+  "subdir": "linux-64",
+  "timestamp": 1676851986000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/docstring-to-markdown-0.11-py311h06a4308_0.conda",
+  "version": "0.11"
+}

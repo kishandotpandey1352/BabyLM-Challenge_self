@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "filelock-3.13.1-py311h06a4308_0.conda",
+  "license": "Unlicense",
+  "md5": "06e9d75c5dccc4d217ef5fb829cec1f7",
+  "name": "filelock",
+  "sha256": "77c2278ddae240a822d4ab9442aa979b0cadeeabb236a6411ab10939262254fd",
+  "size": 24781,
+  "subdir": "linux-64",
+  "timestamp": 1700591286000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/filelock-3.13.1-py311h06a4308_0.conda",
+  "version": "3.13.1"
+}

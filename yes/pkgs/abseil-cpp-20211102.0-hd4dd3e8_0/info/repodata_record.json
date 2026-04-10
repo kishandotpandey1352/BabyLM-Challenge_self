@@ -1,0 +1,20 @@
+{
+  "build": "hd4dd3e8_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=8.4.0",
+    "libstdcxx-ng >=8.4.0"
+  ],
+  "fn": "abseil-cpp-20211102.0-hd4dd3e8_0.conda",
+  "license": "Apache-2.0",
+  "md5": "6c6164c998c0b31113d569f7788a66aa",
+  "name": "abseil-cpp",
+  "sha256": "87989e8288487785de00bfc422b61374c2dff1793df94ec3cda7a983a97a269d",
+  "size": 1044586,
+  "subdir": "linux-64",
+  "timestamp": 1652382888000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/abseil-cpp-20211102.0-hd4dd3e8_0.conda",
+  "version": "20211102.0"
+}

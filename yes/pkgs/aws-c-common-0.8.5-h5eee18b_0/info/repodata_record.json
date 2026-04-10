@@ -1,0 +1,19 @@
+{
+  "build": "h5eee18b_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0"
+  ],
+  "fn": "aws-c-common-0.8.5-h5eee18b_0.conda",
+  "license": "Apache-2.0",
+  "md5": "8e31ed151251a4d5b1d77b4bc2c65cd6",
+  "name": "aws-c-common",
+  "sha256": "4f17e74336d53935fafd3aa69c346737f948426f5b988c24ae6abf958f9abf93",
+  "size": 212399,
+  "subdir": "linux-64",
+  "timestamp": 1706189913000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/aws-c-common-0.8.5-h5eee18b_0.conda",
+  "version": "0.8.5"
+}

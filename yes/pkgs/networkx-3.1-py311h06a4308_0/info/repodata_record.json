@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "networkx-3.1-py311h06a4308_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "bd59515f6ba1ee075a0eed3a92103a2c",
+  "name": "networkx",
+  "sha256": "90c7e275c9d6c1ad96785a594b64b749bd04809eeaae1d7d20078085e1723166",
+  "size": 3459044,
+  "subdir": "linux-64",
+  "timestamp": 1690562128000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/networkx-3.1-py311h06a4308_0.conda",
+  "version": "3.1"
+}

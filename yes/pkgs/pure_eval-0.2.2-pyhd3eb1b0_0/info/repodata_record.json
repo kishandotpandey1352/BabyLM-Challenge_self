@@ -1,0 +1,21 @@
+{
+  "build": "pyhd3eb1b0_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/noarch",
+  "constrains": [],
+  "depends": [
+    "python >=3.5"
+  ],
+  "fn": "pure_eval-0.2.2-pyhd3eb1b0_0.conda",
+  "license": "MIT",
+  "md5": "a87d6d9827e5dff68d34d69971f8a9b1",
+  "name": "pure_eval",
+  "noarch": "python",
+  "package_type": "noarch_python",
+  "sha256": "e579ae0a1205e5706dbf00deacbebc87b889f11c48e2f12323dfec7d2d15b27c",
+  "size": 14407,
+  "subdir": "noarch",
+  "timestamp": 1646925118000,
+  "url": "https://repo.anaconda.com/pkgs/main/noarch/pure_eval-0.2.2-pyhd3eb1b0_0.conda",
+  "version": "0.2.2"
+}

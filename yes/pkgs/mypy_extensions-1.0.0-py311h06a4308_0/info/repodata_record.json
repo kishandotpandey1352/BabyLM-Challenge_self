@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "mypy_extensions-1.0.0-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "85a4d612721f55e6eea7449332fd65b8",
+  "name": "mypy_extensions",
+  "sha256": "f209518fe3da3721fb14a572a57ea837b0390d3b00e73072f1932d63c5ed578f",
+  "size": 12866,
+  "subdir": "linux-64",
+  "timestamp": 1695130958000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/mypy_extensions-1.0.0-py311h06a4308_0.conda",
+  "version": "1.0.0"
+}

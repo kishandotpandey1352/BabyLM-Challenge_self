@@ -1,0 +1,20 @@
+{
+  "build": "h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "nspr-4.35-h6a678d5_0.conda",
+  "license": "MPL-2.0",
+  "md5": "208fff5d60133bcff6998a70c9f5203b",
+  "name": "nspr",
+  "sha256": "8c541b080d78de84d60f806b896301a7574d1bdc684f363b85d522a96aa9d515",
+  "size": 249952,
+  "subdir": "linux-64",
+  "timestamp": 1685541755000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/nspr-4.35-h6a678d5_0.conda",
+  "version": "4.35"
+}

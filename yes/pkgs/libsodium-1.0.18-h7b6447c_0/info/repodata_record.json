@@ -1,0 +1,19 @@
+{
+  "build": "h7b6447c_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.3.0"
+  ],
+  "fn": "libsodium-1.0.18-h7b6447c_0.conda",
+  "license": "ISC",
+  "md5": "c8783b20f0e14bc1d701352c26c264d5",
+  "name": "libsodium",
+  "sha256": "be446d634c6f366fce72b77c7a3b2709f2fd29dd8eedab05df253e99ce08650a",
+  "size": 250267,
+  "subdir": "linux-64",
+  "timestamp": 1581700759000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libsodium-1.0.18-h7b6447c_0.conda",
+  "version": "1.0.18"
+}

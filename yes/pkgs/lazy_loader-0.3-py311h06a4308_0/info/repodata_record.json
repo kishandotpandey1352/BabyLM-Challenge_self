@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "lazy_loader-0.3-py311h06a4308_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "ebffddc8868194085e0005237b6f2f8e",
+  "name": "lazy_loader",
+  "sha256": "0cd63e1817c4b54c052c0386e57bf71b7f4b395f956710e89438904a218de455",
+  "size": 20567,
+  "subdir": "linux-64",
+  "timestamp": 1695850156000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/lazy_loader-0.3-py311h06a4308_0.conda",
+  "version": "0.3"
+}

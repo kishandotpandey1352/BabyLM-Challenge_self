@@ -1,0 +1,20 @@
+{
+  "build": "h6a678d5_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "snappy-1.1.10-h6a678d5_1.conda",
+  "license": "BSD-3-clause AND CC-BY-3.0 AND MIT AND CC-BY AND Public Domain",
+  "md5": "0b793ca60e2aacddbdec5f1a9c5500fe",
+  "name": "snappy",
+  "sha256": "6ddf69653484d028101db1789a441cb0d55d13a2c88b5c54b8073f5214ce5f7f",
+  "size": 43677,
+  "subdir": "linux-64",
+  "timestamp": 1702909413000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/snappy-1.1.10-h6a678d5_1.conda",
+  "version": "1.1.10"
+}

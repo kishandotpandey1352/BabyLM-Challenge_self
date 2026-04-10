@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "cssselect-1.2.0-py311h06a4308_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "9093ee6428f7212724aca980381a2a40",
+  "name": "cssselect",
+  "sha256": "865ae1de93e6d8ce77f7677e18994bc6e50fe7a9d46aab6e56efae1938ffd2d9",
+  "size": 49467,
+  "subdir": "linux-64",
+  "timestamp": 1707340011000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/cssselect-1.2.0-py311h06a4308_0.conda",
+  "version": "1.2.0"
+}

@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "pygments-2.15.1-py311h06a4308_1.conda",
+  "license": "BSD-2-Clause",
+  "md5": "eccebf7e4eae9528fb26af098fb2ac4f",
+  "name": "pygments",
+  "sha256": "86ecf9a93d5fa934e5fc6761682626545fc704938de2bf1c257b3119df704788",
+  "size": 2167512,
+  "subdir": "linux-64",
+  "timestamp": 1684280065000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/pygments-2.15.1-py311h06a4308_1.conda",
+  "version": "2.15.1"
+}

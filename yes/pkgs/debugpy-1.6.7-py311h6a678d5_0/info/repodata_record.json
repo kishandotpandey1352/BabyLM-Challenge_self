@@ -1,0 +1,21 @@
+{
+  "build": "py311h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "debugpy-1.6.7-py311h6a678d5_0.conda",
+  "license": "MIT",
+  "md5": "594c9b18dfe673337514815f4bb4e5d7",
+  "name": "debugpy",
+  "sha256": "7ece6371aa0ba9594e5d54f68babdfaad8b402c2b70e3b153b4dee0482ac5378",
+  "size": 2528322,
+  "subdir": "linux-64",
+  "timestamp": 1690905285000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/debugpy-1.6.7-py311h6a678d5_0.conda",
+  "version": "1.6.7"
+}

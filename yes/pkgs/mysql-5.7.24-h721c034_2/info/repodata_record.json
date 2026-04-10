@@ -1,0 +1,23 @@
+{
+  "build": "h721c034_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "cyrus-sasl >=2.1.28,<3.0a0",
+    "libedit >=3.1.20221030,<3.2.0a0",
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "openssl >=3.0.9,<4.0a0"
+  ],
+  "fn": "mysql-5.7.24-h721c034_2.conda",
+  "license": "GPL-2.0",
+  "md5": "dfc19ca2466d275c4c1f73b62c57f37b",
+  "name": "mysql",
+  "sha256": "c1aaab03aca20d50adf310a25f52623cf9cda0d59adaa73e0878225365cb6f54",
+  "size": 62966301,
+  "subdir": "linux-64",
+  "timestamp": 1688563074000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/mysql-5.7.24-h721c034_2.conda",
+  "version": "5.7.24"
+}

@@ -1,0 +1,20 @@
+{
+  "build": "py311h5eee18b_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "psutil-5.9.0-py311h5eee18b_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "bb0e15716b6b92092aa0e9b89629fa09",
+  "name": "psutil",
+  "sha256": "a23c726ca36fdb43a70a38072a575e42c8f9011557e80f2d8f492eb9076bbe02",
+  "size": 474445,
+  "subdir": "linux-64",
+  "timestamp": 1679337420000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/psutil-5.9.0-py311h5eee18b_0.conda",
+  "version": "5.9.0"
+}

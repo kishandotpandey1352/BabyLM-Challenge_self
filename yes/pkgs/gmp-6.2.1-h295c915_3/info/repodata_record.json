@@ -1,0 +1,20 @@
+{
+  "build": "h295c915_3",
+  "build_number": 3,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.5.0",
+    "libstdcxx-ng >=7.5.0"
+  ],
+  "fn": "gmp-6.2.1-h295c915_3.conda",
+  "license": "GPL-2.0-or-later AND LGPL-3.0-or-later",
+  "md5": "045e9e85252d5efc8c09a136b4c2b3d4",
+  "name": "gmp",
+  "sha256": "e3797cbfa1cb235590989946e7a0535884aa14901810447e66da143cebc63c11",
+  "size": 556717,
+  "subdir": "linux-64",
+  "timestamp": 1653996358000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/gmp-6.2.1-h295c915_3.conda",
+  "version": "6.2.1"
+}

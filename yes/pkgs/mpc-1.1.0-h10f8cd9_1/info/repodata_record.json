@@ -1,0 +1,21 @@
+{
+  "build": "h10f8cd9_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "gmp >=6.1.2",
+    "libgcc-ng >=7.2.0",
+    "mpfr >=4.0.1,<5.0a0"
+  ],
+  "fn": "mpc-1.1.0-h10f8cd9_1.conda",
+  "license": "LGPL 3",
+  "md5": "a04e160ec0a1117f7638590e534f16c7",
+  "name": "mpc",
+  "sha256": "90322d0e98d817ec615669aefb99d0bddce7e029ec7a7f3c5b48bd1bf4d41feb",
+  "size": 91993,
+  "subdir": "linux-64",
+  "timestamp": 1527612531000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/mpc-1.1.0-h10f8cd9_1.conda",
+  "version": "1.1.0"
+}

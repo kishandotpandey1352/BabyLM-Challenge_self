@@ -1,0 +1,21 @@
+{
+  "build": "hdbd6064_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "openssl 3.*",
+    "openssl >=3.0.8,<4.0a0"
+  ],
+  "fn": "libevent-2.1.12-hdbd6064_1.conda",
+  "license": "BSD-3-Clause",
+  "md5": "99312bf9d90f1ea14534b40afb61ce63",
+  "name": "libevent",
+  "sha256": "3983af17f0c78889b09447873b69ba3d2c8b0556bf5088e6c5b509f121d85054",
+  "size": 464298,
+  "subdir": "linux-64",
+  "timestamp": 1685052130000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libevent-2.1.12-hdbd6064_1.conda",
+  "version": "2.1.12"
+}

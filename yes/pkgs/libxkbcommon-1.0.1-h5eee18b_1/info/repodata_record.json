@@ -1,0 +1,21 @@
+{
+  "build": "h5eee18b_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libxcb >=1.15,<2.0a0",
+    "libxml2 >=2.10.3,<2.11.0a0"
+  ],
+  "fn": "libxkbcommon-1.0.1-h5eee18b_1.conda",
+  "license": "MIT/X11 Derivative",
+  "md5": "888b2e8f1bbf21017c503826e2d24b50",
+  "name": "libxkbcommon",
+  "sha256": "d0ad34ddd1a6d391ec291ae7a126646b2f5794cdca4bd00cc6e2afc4233fb27e",
+  "size": 604308,
+  "subdir": "linux-64",
+  "timestamp": 1679578328000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libxkbcommon-1.0.1-h5eee18b_1.conda",
+  "version": "1.0.1"
+}

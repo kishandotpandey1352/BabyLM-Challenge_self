@@ -1,0 +1,21 @@
+{
+  "build": "h6a678d5_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "gflags >=2.2.2,<2.3.0a0",
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "glog-0.5.0-h6a678d5_1.conda",
+  "license": "BSD-3-Clause",
+  "md5": "4cc83b6e8045c98f80bb74eb5a331e5b",
+  "name": "glog",
+  "sha256": "d744952299cf64300fcefc4628df8610eb5dc2504c8e04d38a059363bd696a41",
+  "size": 109448,
+  "subdir": "linux-64",
+  "timestamp": 1706895276000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/glog-0.5.0-h6a678d5_1.conda",
+  "version": "0.5.0"
+}

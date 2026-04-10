@@ -1,0 +1,22 @@
+{
+  "build": "py311hdbbb534_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libxml2 >=2.10.4,<2.11.0a0",
+    "libxslt >=1.1.37,<2.0a0",
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "lxml-4.9.3-py311hdbbb534_0.conda",
+  "license": "BSD-3-Clause and GPL-2.0-only and ZPL-2.0 and LicenseRef-ElementTree",
+  "md5": "8131d4c4095e98ef845b9a89f6e16b6f",
+  "name": "lxml",
+  "sha256": "f68415c9cc4f33b33d703c9978b4fe024c6ca577151730beb5c12e82fe850890",
+  "size": 1579832,
+  "subdir": "linux-64",
+  "timestamp": 1695058273000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/lxml-4.9.3-py311hdbbb534_0.conda",
+  "version": "4.9.3"
+}

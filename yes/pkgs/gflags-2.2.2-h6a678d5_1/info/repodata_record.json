@@ -1,0 +1,20 @@
+{
+  "build": "h6a678d5_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "gflags-2.2.2-h6a678d5_1.conda",
+  "license": "BSD-3-Clause",
+  "md5": "934362bfb503ed169413b0a209959fe7",
+  "name": "gflags",
+  "sha256": "2cfb4825a7b146b59355e239b2158bd67361dd2b114b4d58062719e8a33bb3e0",
+  "size": 148194,
+  "subdir": "linux-64",
+  "timestamp": 1706888218000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/gflags-2.2.2-h6a678d5_1.conda",
+  "version": "2.2.2"
+}

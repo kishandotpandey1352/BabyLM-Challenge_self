@@ -1,5 +1,7 @@
-import setuptools
+from setuptools import setup, find_packages
 
-
-# This is to make sure that the package supports editable installs
-setuptools.setup()
+setup(
+    name='evaluation_pipeline_2024',
+    version='0.1',
+    packages=find_packages(),
+)

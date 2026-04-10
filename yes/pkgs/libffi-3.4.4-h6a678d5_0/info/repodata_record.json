@@ -1,0 +1,20 @@
+{
+  "build": "h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "libffi-3.4.4-h6a678d5_0.conda",
+  "license": "MIT",
+  "md5": "06e288f9250abef59b9a367d151fc339",
+  "name": "libffi",
+  "sha256": "2ac2a8507a48fdf8ba71ab38b0843ca373782a4a0c6367775498843c24bbc08c",
+  "size": 145364,
+  "subdir": "linux-64",
+  "timestamp": 1683716564000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libffi-3.4.4-h6a678d5_0.conda",
+  "version": "3.4.4"
+}

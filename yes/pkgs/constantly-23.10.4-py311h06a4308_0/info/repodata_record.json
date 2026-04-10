@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "constantly-23.10.4-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "7dc94a3364e7e48824a5a77a8e546246",
+  "name": "constantly",
+  "sha256": "dbd0cc84b979fb55024335685baa9ae8e6009e0b0527fe09d70f591e71ea5049",
+  "size": 32258,
+  "subdir": "linux-64",
+  "timestamp": 1703165668000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/constantly-23.10.4-py311h06a4308_0.conda",
+  "version": "23.10.4"
+}

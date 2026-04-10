@@ -1,0 +1,21 @@
+{
+  "build": "h5eee18b_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "icu >=73.1,<74.0a0",
+    "libgcc-ng >=11.2.0",
+    "libxml2 >=2.10.4,<2.11.0a0"
+  ],
+  "fn": "libxslt-1.1.37-h5eee18b_1.conda",
+  "license": "MIT",
+  "md5": "6f02fe89170c00b93ca5a3b81da6d9e0",
+  "name": "libxslt",
+  "sha256": "aaaede63264c851245ae5a1bf23beb2749382c2bbd1ac064bfa9dd3742f400c4",
+  "size": 272717,
+  "subdir": "linux-64",
+  "timestamp": 1692973520000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libxslt-1.1.37-h5eee18b_1.conda",
+  "version": "1.1.37"
+}

@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "pkginfo-1.9.6-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "52761274e7046375767d1fa8bf466e78",
+  "name": "pkginfo",
+  "sha256": "32c536604523e7c9f69a061e73b511983320b25b892e17bf651d778d4709d616",
+  "size": 66302,
+  "subdir": "linux-64",
+  "timestamp": 1679431191000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/pkginfo-1.9.6-py311h06a4308_0.conda",
+  "version": "1.9.6"
+}

@@ -1,0 +1,21 @@
+{
+  "build": "pyhd3eb1b0_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/noarch",
+  "constrains": [],
+  "depends": [
+    "python >=3.6.1,<4.0"
+  ],
+  "fn": "isort-5.9.3-pyhd3eb1b0_0.conda",
+  "license": "MIT",
+  "md5": "75f2497fe01a9ac6208d72e26066b76a",
+  "name": "isort",
+  "noarch": "python",
+  "package_type": "noarch_python",
+  "sha256": "c20bf1d70180ea452b16b89b9a62aab2192a8b8ad71d63c46beabc1fbb9b2451",
+  "size": 84814,
+  "subdir": "noarch",
+  "timestamp": 1628603821000,
+  "url": "https://repo.anaconda.com/pkgs/main/noarch/isort-5.9.3-pyhd3eb1b0_0.conda",
+  "version": "5.9.3"
+}

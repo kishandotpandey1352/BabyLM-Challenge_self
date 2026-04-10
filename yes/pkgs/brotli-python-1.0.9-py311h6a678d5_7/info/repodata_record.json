@@ -1,0 +1,21 @@
+{
+  "build": "py311h6a678d5_7",
+  "build_number": 7,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "brotli-python-1.0.9-py311h6a678d5_7.conda",
+  "license": "MIT",
+  "md5": "e7ad3b066db40f54d37099e58fef130a",
+  "name": "brotli-python",
+  "sha256": "d317c3d6460f62c7acf40d27c4e86b6dc8d6eb91549b88d6fdda9bc1d365d8bb",
+  "size": 325409,
+  "subdir": "linux-64",
+  "timestamp": 1676830217000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/brotli-python-1.0.9-py311h6a678d5_7.conda",
+  "version": "1.0.9"
+}

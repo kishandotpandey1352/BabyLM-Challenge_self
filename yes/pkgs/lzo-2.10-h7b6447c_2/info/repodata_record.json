@@ -1,0 +1,19 @@
+{
+  "build": "h7b6447c_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.3.0"
+  ],
+  "fn": "lzo-2.10-h7b6447c_2.conda",
+  "license": "GPL v2+",
+  "md5": "65722a7644f424de73fea6e87edd7653",
+  "name": "lzo",
+  "sha256": "99dc28dd81f7d94a363a242e56fb9ebdaf350ca6445a8f1b31dfe78be474a5df",
+  "size": 188158,
+  "subdir": "linux-64",
+  "timestamp": 1587075113000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/lzo-2.10-h7b6447c_2.conda",
+  "version": "2.10"
+}

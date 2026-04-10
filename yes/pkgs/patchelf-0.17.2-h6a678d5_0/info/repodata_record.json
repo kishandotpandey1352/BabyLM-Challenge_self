@@ -1,0 +1,20 @@
+{
+  "build": "h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "patchelf-0.17.2-h6a678d5_0.conda",
+  "license": "GPL-3.0-or-later",
+  "md5": "63ad6ea1e47f568a1bdb5edb66734026",
+  "name": "patchelf",
+  "sha256": "b9f23d21314cbb1657a8058913d4074c0c1f28bac66573e899085ec820a8200c",
+  "size": 100532,
+  "subdir": "linux-64",
+  "timestamp": 1675208106000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/patchelf-0.17.2-h6a678d5_0.conda",
+  "version": "0.17.2"
+}

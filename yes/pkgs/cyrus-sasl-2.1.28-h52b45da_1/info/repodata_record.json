@@ -1,0 +1,22 @@
+{
+  "build": "h52b45da_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "krb5 >=1.20.1,<1.21.0a0",
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "openssl >=3.0.9,<4.0a0"
+  ],
+  "fn": "cyrus-sasl-2.1.28-h52b45da_1.conda",
+  "license": "BSD-3-Clause-Attribution",
+  "md5": "d634af1577e4008f9228ae96ce671c44",
+  "name": "cyrus-sasl",
+  "sha256": "3172404f943d3a4aacdeb53bf6bdc787a735870cf38104c7b45f41b114f5a64c",
+  "size": 242528,
+  "subdir": "linux-64",
+  "timestamp": 1688045783000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/cyrus-sasl-2.1.28-h52b45da_1.conda",
+  "version": "2.1.28"
+}

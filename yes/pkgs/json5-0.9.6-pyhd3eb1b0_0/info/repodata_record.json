@@ -1,0 +1,21 @@
+{
+  "build": "pyhd3eb1b0_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/noarch",
+  "constrains": [],
+  "depends": [
+    "python"
+  ],
+  "fn": "json5-0.9.6-pyhd3eb1b0_0.conda",
+  "license": "Apache-2.0",
+  "md5": "4e721ee2dbfa20069719d2ee19185031",
+  "name": "json5",
+  "noarch": "python",
+  "package_type": "noarch_python",
+  "sha256": "595b96c7e20703125ff4865ee55ba282357b57438a609dd7660610318127ca2e",
+  "size": 21787,
+  "subdir": "noarch",
+  "timestamp": 1624432813000,
+  "url": "https://repo.anaconda.com/pkgs/main/noarch/json5-0.9.6-pyhd3eb1b0_0.conda",
+  "version": "0.9.6"
+}

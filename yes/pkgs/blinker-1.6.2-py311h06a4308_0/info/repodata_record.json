@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "blinker-1.6.2-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "d579b705c944ce0ec4c2b08a8c5cf0dc",
+  "name": "blinker",
+  "sha256": "85747e33a8d05b614cefae96de6ba3a2f4c6b466b7864c2dfacd3372d87e9831",
+  "size": 33616,
+  "subdir": "linux-64",
+  "timestamp": 1696539086000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/blinker-1.6.2-py311h06a4308_0.conda",
+  "version": "1.6.2"
+}

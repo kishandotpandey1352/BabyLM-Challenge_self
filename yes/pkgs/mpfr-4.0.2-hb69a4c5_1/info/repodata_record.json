@@ -1,0 +1,20 @@
+{
+  "build": "hb69a4c5_1",
+  "build_number": 1,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "gmp >=6.1.2",
+    "libgcc-ng >=7.3.0"
+  ],
+  "fn": "mpfr-4.0.2-hb69a4c5_1.conda",
+  "license": "LGPL-3.0-only",
+  "md5": "9000a148d49baa5a3b3428397889d37d",
+  "name": "mpfr",
+  "sha256": "eaa635e5db2ccff32d0fc43dce1492bc235075c843dc86522578f2f098c92a08",
+  "size": 498414,
+  "subdir": "linux-64",
+  "timestamp": 1593116348000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/mpfr-4.0.2-hb69a4c5_1.conda",
+  "version": "4.0.2"
+}

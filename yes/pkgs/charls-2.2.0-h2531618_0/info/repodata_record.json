@@ -1,0 +1,20 @@
+{
+  "build": "h2531618_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.3.0",
+    "libstdcxx-ng >=7.3.0"
+  ],
+  "fn": "charls-2.2.0-h2531618_0.conda",
+  "license": "BSD-3-Clause",
+  "md5": "abcace262ab5673ba2b89c658b7bc846",
+  "name": "charls",
+  "sha256": "f4ed7440c21b469e10b84a6bd5a3bc9a59147526e9b6ec06b51b9d92724db169",
+  "size": 119911,
+  "subdir": "linux-64",
+  "timestamp": 1612240399000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/charls-2.2.0-h2531618_0.conda",
+  "version": "2.2.0"
+}

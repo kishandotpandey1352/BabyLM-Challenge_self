@@ -1,0 +1,20 @@
+{
+  "build": "hdbd6064_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libcurl 8.5.0 h251f7ec_0",
+    "libgcc-ng >=11.2.0"
+  ],
+  "fn": "curl-8.5.0-hdbd6064_0.conda",
+  "license": "curl",
+  "md5": "a9071f6a8ddbf579a1523ca642cabf16",
+  "name": "curl",
+  "sha256": "fab09ef07aa7399a8d52bef27cb9ad8f53030c52f14a242a048ec24f90b401d3",
+  "size": 87950,
+  "subdir": "linux-64",
+  "timestamp": 1704383728000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/curl-8.5.0-hdbd6064_0.conda",
+  "version": "8.5.0"
+}

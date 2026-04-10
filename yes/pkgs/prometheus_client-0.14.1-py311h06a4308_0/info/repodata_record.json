@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "prometheus_client-0.14.1-py311h06a4308_0.conda",
+  "license": "Apache-2.0",
+  "md5": "74866d95e06bb1dde3c8a5b4f3c023a3",
+  "name": "prometheus_client",
+  "sha256": "e080c0c21859ef4b81526aeee36f529daab6d9722726085402d949157dac32a2",
+  "size": 122854,
+  "subdir": "linux-64",
+  "timestamp": 1679340540000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/prometheus_client-0.14.1-py311h06a4308_0.conda",
+  "version": "0.14.1"
+}

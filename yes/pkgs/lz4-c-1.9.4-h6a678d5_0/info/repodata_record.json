@@ -1,0 +1,20 @@
+{
+  "build": "h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "lz4-c-1.9.4-h6a678d5_0.conda",
+  "license": "BSD-2-Clause",
+  "md5": "53915e9402180a7f22ea619c41089520",
+  "name": "lz4-c",
+  "sha256": "763815f0f0795e4240df99d1992ae9799b3ac62eaea97438086526988ef31073",
+  "size": 158001,
+  "subdir": "linux-64",
+  "timestamp": 1670944701000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/lz4-c-1.9.4-h6a678d5_0.conda",
+  "version": "1.9.4"
+}

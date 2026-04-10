@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "pydispatcher-2.0.5-py311h06a4308_2.conda",
+  "license": "BSD-3-Clause",
+  "md5": "9182f6b41dc8aac3193114a6dc750048",
+  "name": "pydispatcher",
+  "sha256": "6bb8c5357e048c95550a183c1e85eed26aa9b5e2561aa199544952720326cc98",
+  "size": 24423,
+  "subdir": "linux-64",
+  "timestamp": 1676845322000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/pydispatcher-2.0.5-py311h06a4308_2.conda",
+  "version": "2.0.5"
+}

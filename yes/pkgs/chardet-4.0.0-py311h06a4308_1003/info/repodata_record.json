@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_1003",
+  "build_number": 1003,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "chardet-4.0.0-py311h06a4308_1003.conda",
+  "license": "LGPL2",
+  "md5": "6efa6e9b342ac96252eae3e0271ec13f",
+  "name": "chardet",
+  "sha256": "907af9cbfd5eb4a87078285c0c59178a8732245f4d8b5ef4eb26256b0a9e8895",
+  "size": 222732,
+  "subdir": "linux-64",
+  "timestamp": 1676830288000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/chardet-4.0.0-py311h06a4308_1003.conda",
+  "version": "4.0.0"
+}

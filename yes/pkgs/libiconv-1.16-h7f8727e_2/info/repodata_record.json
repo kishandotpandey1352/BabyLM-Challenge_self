@@ -1,0 +1,19 @@
+{
+  "build": "h7f8727e_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.5.0"
+  ],
+  "fn": "libiconv-1.16-h7f8727e_2.conda",
+  "license": "GPL-3.0-or-later",
+  "md5": "80d4bc7d7e58b5f0be41d763f60994f5",
+  "name": "libiconv",
+  "sha256": "bcdab81d4856106e7876a40a7b476147861dafd5a8761885463b90796d0fd202",
+  "size": 753730,
+  "subdir": "linux-64",
+  "timestamp": 1650983457000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libiconv-1.16-h7f8727e_2.conda",
+  "version": "1.16"
+}

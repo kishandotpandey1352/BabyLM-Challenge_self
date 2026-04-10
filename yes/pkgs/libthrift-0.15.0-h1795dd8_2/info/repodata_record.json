@@ -1,0 +1,24 @@
+{
+  "build": "h1795dd8_2",
+  "build_number": 2,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "boost-cpp >=1.73",
+    "libevent >=2.1.12,<2.1.13.0a0",
+    "libgcc-ng >=11.2.0",
+    "libstdcxx-ng >=11.2.0",
+    "openssl >=3.0.9,<4.0a0",
+    "zlib >=1.2.13,<1.3.0a0"
+  ],
+  "fn": "libthrift-0.15.0-h1795dd8_2.conda",
+  "license": "Apache-2.0",
+  "md5": "ec4c17f00b24cc0b9dfd5e0e0a857bce",
+  "name": "libthrift",
+  "sha256": "7a0ef2172bfd0e12cb385af99731e59febab6f84af2b892a4b5d7b0f2b175846",
+  "size": 4181059,
+  "subdir": "linux-64",
+  "timestamp": 1687975185000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/libthrift-0.15.0-h1795dd8_2.conda",
+  "version": "0.15.0"
+}

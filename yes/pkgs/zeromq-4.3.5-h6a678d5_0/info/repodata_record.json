@@ -1,0 +1,21 @@
+{
+  "build": "h6a678d5_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=11.2.0",
+    "libsodium >=1.0.18,<1.0.19.0a0",
+    "libstdcxx-ng >=11.2.0"
+  ],
+  "fn": "zeromq-4.3.5-h6a678d5_0.conda",
+  "license": "MPL-2.0",
+  "md5": "354c934a4a5500f4c455c630f2702dbc",
+  "name": "zeromq",
+  "sha256": "0fbbf456eb2df2968a83a37d66e906b2cac55d37d1d09ed93b52f6f1898a84cf",
+  "size": 375103,
+  "subdir": "linux-64",
+  "timestamp": 1705602144000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/zeromq-4.3.5-h6a678d5_0.conda",
+  "version": "4.3.5"
+}

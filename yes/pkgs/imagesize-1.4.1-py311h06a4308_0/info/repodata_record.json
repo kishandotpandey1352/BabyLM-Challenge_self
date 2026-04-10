@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "imagesize-1.4.1-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "b1336aeeee49deaee844b31324ce0a16",
+  "name": "imagesize",
+  "sha256": "6a6cd65e5e04645198d9e0a064161c03070f592c48a509422d4c8c8ae78c6463",
+  "size": 17357,
+  "subdir": "linux-64",
+  "timestamp": 1676830841000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/imagesize-1.4.1-py311h06a4308_0.conda",
+  "version": "1.4.1"
+}

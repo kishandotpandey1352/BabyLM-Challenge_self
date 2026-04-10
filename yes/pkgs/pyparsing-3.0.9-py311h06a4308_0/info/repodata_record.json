@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "pyparsing-3.0.9-py311h06a4308_0.conda",
+  "license": "MIT",
+  "md5": "0226abf73d27eb89e3bea74f1cf3123f",
+  "name": "pyparsing",
+  "sha256": "365aef544a37bdcf3a80f6ae4b613e67cc54aa5e8fceae80534d333fe5be2883",
+  "size": 208735,
+  "subdir": "linux-64",
+  "timestamp": 1677811584000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/pyparsing-3.0.9-py311h06a4308_0.conda",
+  "version": "3.0.9"
+}

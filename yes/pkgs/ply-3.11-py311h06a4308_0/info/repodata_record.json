@@ -1,0 +1,19 @@
+{
+  "build": "py311h06a4308_0",
+  "build_number": 0,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "python >=3.11,<3.12.0a0"
+  ],
+  "fn": "ply-3.11-py311h06a4308_0.conda",
+  "license": "BSD 3-clause",
+  "md5": "5e38758b2f9d1bb6c46cf1fd8efb7540",
+  "name": "ply",
+  "sha256": "d900265772855f616e14208fd50b0946470a06ac69292f4cac663a5c6fd2400f",
+  "size": 113843,
+  "subdir": "linux-64",
+  "timestamp": 1676824981000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/ply-3.11-py311h06a4308_0.conda",
+  "version": "3.11"
+}

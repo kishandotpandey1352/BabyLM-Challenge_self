@@ -1,0 +1,19 @@
+{
+  "build": "h7b6447c_1001",
+  "build_number": 1001,
+  "channel": "https://repo.anaconda.com/pkgs/main/linux-64",
+  "constrains": [],
+  "depends": [
+    "libgcc-ng >=7.3.0"
+  ],
+  "fn": "patch-2.7.6-h7b6447c_1001.conda",
+  "license": "GPL 3",
+  "md5": "5a47ace7ef08447fe6a602ff16129393",
+  "name": "patch",
+  "sha256": "eadc5b8a783adba6c0d39d2f270b180632f22d4330c93a5700b1bddc01905216",
+  "size": 122130,
+  "subdir": "linux-64",
+  "timestamp": 1573953235000,
+  "url": "https://repo.anaconda.com/pkgs/main/linux-64/patch-2.7.6-h7b6447c_1001.conda",
+  "version": "2.7.6"
+}
