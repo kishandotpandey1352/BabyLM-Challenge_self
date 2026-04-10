@@ -16,3 +16,6 @@ models/
 *.h5
 *.hdf5
 *.onnx
+*.pkl
+*.joblib
+*.zst

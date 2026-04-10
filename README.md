@@ -1,6 +1,9 @@
 # BabyLM-Challenge
 Team NA1 Model implementation for the BabyLM Challenge.
 
+Note for collaborators:
+- Repo history was rewritten to remove large files (>50MB). If you have an existing clone, re-clone or run `git fetch --all` then `git reset --hard origin/main`.
+
 GPT2 decoder model with entropy and adaptive curriculum based design.
 
 Prerequisites:
